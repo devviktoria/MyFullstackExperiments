@@ -19,7 +19,7 @@ AS
 
     DECLARE @newJokeId INT;
     SET @newJokeId = @@IDENTITY;
-    PRINT @newJokeId
+    
     INSERT INTO EmotionCounters(JokeId, Emotion, Counter) VALUES (@newJokeId, 'lshic', 0);
     INSERT INTO EmotionCounters(JokeId, Emotion, Counter) VALUES (@newJokeId, 'lol', 0);
     INSERT INTO EmotionCounters(JokeId, Emotion, Counter) VALUES (@newJokeId, 'happy', 0);
