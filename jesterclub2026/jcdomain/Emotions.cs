@@ -1,5 +1,3 @@
-using System;
-
 namespace jcdomain;
 
 public static class Emotions

@@ -17,8 +17,15 @@ public class JesterClubDbContext : DbContext
 
     public DbSet<ResponseStatistic> ResponseStatistics => Set<ResponseStatistic>();
 
+    public JesterClubDbContext(DbContextOptions<JesterClubDbContext> options) : base(options) { }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        if (optionsBuilder.IsConfigured)
+        {
+            return;
+        }
+
         string? dbConnectionString = Environment.GetEnvironmentVariable("ConnectionStrings__jcwebapi");
 
         if (dbConnectionString is null)
