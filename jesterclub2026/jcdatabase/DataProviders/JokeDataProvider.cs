@@ -26,6 +26,14 @@ public class JokeDataProvider : IJokeDataProvider
             .FirstOrDefaultAsync(j => j.JokeId == id, ct);
     }
 
+    public async Task<Joke?> GetJokeUpsertData(int id, CancellationToken ct)
+    {
+        return await _dbContext.Jokes
+            .Include(j => j.Tags)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(j => j.JokeId == id, ct);
+    }
+
     public async Task<IReadOnlyList<Joke>> GetJokesByUser(string mode, int userId, int jokesPerPage, int pageIndex, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
