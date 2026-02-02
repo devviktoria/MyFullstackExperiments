@@ -1,0 +1,59 @@
+@use '@angular/material' as mat;
+
+.joke-card-yellow {
+  @include mat.card-overrides((
+    elevated-container-color: var(--joke-card-yellow)
+  ));
+}
+
+.joke-card-red {
+  @include mat.card-overrides((
+    elevated-container-color: var(--joke-card-red)
+  ));
+}
+
+.joke-card-blue {
+  @include mat.card-overrides((
+    elevated-container-color: var(--joke-card-blue)
+  ));
+}
+
+.joke-card {
+  max-width: 300px;
+}
+
+.joke-card-tags {
+  padding: 1rem;
+}
+
+.joke-card-emotions {
+  display: flex;
+  margin-right: 1rem;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.joke-text {
+  white-space: pre-line;
+  line-height: 1.4;
+  font-size: larger;
+  font-weight: 500;
+}
+
+.joke-source {
+  text-align: right; 
+  padding-left: 1rem; 
+  padding-right: 1rem;
+  font-size: smaller;
+}
+
+span.joke-emoji{
+  font-size: x-large;
+  padding-right: 0.25rem;
+}
+
+a.joke-emoji {
+  margin-right: 0.5rem;
+  vertical-align: top;
+}
+

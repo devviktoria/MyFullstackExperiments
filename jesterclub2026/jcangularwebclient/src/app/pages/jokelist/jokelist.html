@@ -1,0 +1,11 @@
+<section class="joke-list">
+  @if (jokes$ | async; as jokes) {
+    @if (jokes.length > 0) {
+      @for (joke of jokes; track joke.jokeId) {
+        <app-jokecard [joke]="joke" />
+      }
+    } @else {
+      <p>There are no jokes available.</p>
+    }
+  }
+</section>

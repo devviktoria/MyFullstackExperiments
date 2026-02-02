@@ -1,0 +1,27 @@
+<mat-card class="{{ getRandomCardClassName() }}" appearance="raised">
+  <mat-card-content>
+    <p class="joke-text">{{ joke().text }}</p>
+  </mat-card-content>
+  <mat-card-footer
+    ><p class="joke-source">
+      Source:
+      {{ joke().source }}
+    </p></mat-card-footer
+  >
+  <mat-card-footer
+    ><div class="joke-card-emotions">
+      @for (emotionResponse of joke().emotionResponses; track emotionResponse.emotion) {
+        <a matBadge="{{ emotionResponse.counter }}" class="joke-emoji"
+          ><span class="joke-emoji">{{ getEmojiForEmotion(emotionResponse.emotion) }}</span></a
+        >
+      }
+    </div>
+  </mat-card-footer>
+  <mat-card-footer class="joke-card-tags">
+    <mat-chip-set aria-label="tags">
+      @for (tag of joke().tags; track tag) {
+        <mat-chip>{{ tag }}</mat-chip>
+      }
+    </mat-chip-set>
+  </mat-card-footer>
+</mat-card>

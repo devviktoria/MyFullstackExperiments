@@ -1,0 +1,44 @@
+<header class="header-row">
+  <mat-toolbar>
+    <span class="header-item">
+      <a matButton [routerLink]="['/']">{{ title() }}</a>
+    </span>
+    <span>
+      <app-layout-userwelcome />
+    </span>
+    <span class="spacer"></span>
+    <div class="header-item">
+      <input type="text" placeholder="Joke content" #filter />
+      <button type="submit">Search</button>
+    </div>
+    <div>
+      <form>
+        <mat-form-field>
+          <mat-label>Select User</mat-label>
+          <mat-select
+            name="userSelector"
+            [value]="currentUserId"
+            (selectionChange)="onUserChange($event.value)"
+          >
+            @for (userSummary of userSummaryList; track userSummary) {
+              <mat-option [value]="userSummary.id">{{ userSummary.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+    <!-- <div>
+    <form>
+      <select>
+        <option value="os">From OS</option>
+        <option value="light">Light Theme</option>
+        <option value="dark">Dark Theme</option>
+      </select>
+    </form>
+  </div> -->
+  </mat-toolbar>
+</header>
+
+<main>
+  <section><router-outlet /></section>
+</main>
