@@ -15,7 +15,7 @@ public class JokeDataService : IJokeDataService
 
     public JokeUpsertDto GetNewJokeUpsertData()
     {
-        return new JokeUpsertDto(0, string.Empty, 0, string.Empty, DateTime.Now, new List<string>());
+        return new JokeUpsertDto(0, string.Empty, string.Empty, DateTime.Now, null, 0, new List<string>());
     }
 
     public async Task<JokeUpsertDto?> GetJokeUpsertData(int id, CancellationToken cancellationToken)
@@ -29,9 +29,10 @@ public class JokeDataService : IJokeDataService
         return new JokeUpsertDto(
                     joke.JokeId,
                     joke.JokeText,
-                    joke.UserId,
                     joke.Source ?? "",
                     joke.CreatedDate,
+                    joke.ReleasedDate,
+                    joke.UserId,
                     joke.Tags is null ? new List<string>() : joke.Tags.Select(tag => tag.Name)
                     );
     }
