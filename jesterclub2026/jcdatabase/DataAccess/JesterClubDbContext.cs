@@ -17,6 +17,8 @@ public class JesterClubDbContext : DbContext
 
     public DbSet<ResponseStatistic> ResponseStatistics => Set<ResponseStatistic>();
 
+    public JesterClubDbContext() { }
+
     public JesterClubDbContext(DbContextOptions<JesterClubDbContext> options) : base(options) { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -47,6 +49,20 @@ public class JesterClubDbContext : DbContext
                     b.HasCheckConstraint(
                         "CK_EmotionValue",
                         $"[Emotion] IN ('{string.Join("','", Emotions.Values)}')"));
-    }
 
+        modelBuilder.Entity<Tag>()
+                    .HasIndex(t => t.Name)
+                    .IsUnique();
+
+
+        modelBuilder.Entity<Tag>()
+                    .Property(t => t.Name)
+                    .HasConversion(
+                        v => v.ToLowerInvariant(),
+                        v => v
+                    );
+
+        modelBuilder.Entity<Joke>()
+                    .ToTable(tb => tb.UseSqlOutputClause(false));
+    }
 }

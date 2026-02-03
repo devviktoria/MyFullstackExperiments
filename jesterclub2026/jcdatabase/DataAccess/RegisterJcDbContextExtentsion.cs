@@ -14,6 +14,7 @@ public static class RegisterJcDbContextExtentsion
         services.AddDbContext<JesterClubDbContext>(options =>
             options.UseSqlServer(connectionString));
 
+        services.AddScoped<ITagDataProvider, TagDataProvider>();
         services.AddScoped<IJokeDataProvider, JokeDataProvider>();
 
         return services;

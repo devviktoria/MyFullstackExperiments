@@ -14,9 +14,9 @@ public interface IJokeDataProvider
 
     public Task<IReadOnlyList<Joke>> GetMostPopularJokes(CancellationToken cancellationToken);
 
-    public Task<Joke> Create(Joke joke);
+    public Task CreateJoke(Joke joke, IEnumerable<string> tagNames, CancellationToken cancellationToken);
 
-    public Task Update(Joke joke);
+    public Task UpdateJoke(Joke joke, IEnumerable<string> tagNames, CancellationToken cancellationToken);
 
     public Task Remove(int id);
 

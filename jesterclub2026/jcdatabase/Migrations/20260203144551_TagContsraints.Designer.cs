@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using jcdatabase.DataAccess;
 
@@ -11,9 +12,11 @@ using jcdatabase.DataAccess;
 namespace jcdatabase.Migrations
 {
     [DbContext(typeof(JesterClubDbContext))]
-    partial class JesterClubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260203144551_TagContsraints")]
+    partial class TagContsraints
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace jcdatabase.Migrations
 
                     b.HasIndex("TagsTagId");
 
-                    b.ToTable("JokeTag", (string)null);
+                    b.ToTable("JokeTag");
                 });
 
             modelBuilder.Entity("jcdatabase.Models.EmotionCounter", b =>
@@ -50,7 +53,7 @@ namespace jcdatabase.Migrations
 
                     b.HasKey("JokeId", "Emotion");
 
-                    b.ToTable("EmotionCounters", null, t =>
+                    b.ToTable("EmotionCounters", t =>
                         {
                             t.HasCheckConstraint("CK_EmotionValue", "[Emotion] IN ('sleepy','none','happy','lol','lshic')");
                         });
@@ -89,7 +92,7 @@ namespace jcdatabase.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Jokes", (string)null);
+                    b.ToTable("Jokes");
                 });
 
             modelBuilder.Entity("jcdatabase.Models.ResponseStatistic", b =>
@@ -105,7 +108,7 @@ namespace jcdatabase.Migrations
 
                     b.HasKey("JokeId", "Day");
 
-                    b.ToTable("ResponseStatistics", (string)null);
+                    b.ToTable("ResponseStatistics");
                 });
 
             modelBuilder.Entity("jcdatabase.Models.Tag", b =>
@@ -126,7 +129,7 @@ namespace jcdatabase.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("jcdatabase.Models.User", b =>
@@ -148,7 +151,7 @@ namespace jcdatabase.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("JokeTag", b =>

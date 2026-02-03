@@ -37,6 +37,37 @@ public class JokeDataService : IJokeDataService
                     );
     }
 
+    public async Task CreateJoke(JokeUpsertDto jokeUpsertDto, CancellationToken cancellationToken)
+    {
+        Joke joke = new Joke
+        {
+            JokeText = jokeUpsertDto.Text,
+            Source = jokeUpsertDto.Source,
+            CreatedDate = jokeUpsertDto.CreatedDate,
+            ReleasedDate = jokeUpsertDto.ReleasedDate,
+            ResponseSum = 0,
+            UserId = jokeUpsertDto.UserId
+        };
+
+        await jokeDataProvider.CreateJoke(joke, jokeUpsertDto.Tags, cancellationToken);
+    }
+
+    public async Task UpdateJoke(JokeUpsertDto jokeUpsertDto, CancellationToken cancellationToken)
+    {
+        Joke joke = new Joke
+        {
+            JokeId = jokeUpsertDto.JokeId,
+            JokeText = jokeUpsertDto.Text,
+            Source = jokeUpsertDto.Source,
+            CreatedDate = jokeUpsertDto.CreatedDate,
+            ReleasedDate = jokeUpsertDto.ReleasedDate,
+            UserId = jokeUpsertDto.UserId
+        };
+
+        await jokeDataProvider.UpdateJoke(joke, jokeUpsertDto.Tags, cancellationToken);
+    }
+
+
     public async Task<IEnumerable<JokeSummaryDto>> GetLatestJokes(CancellationToken cancellationToken)
     {
         var latestJokes = await jokeDataProvider.GetLatestJokes(cancellationToken);
@@ -50,6 +81,7 @@ public class JokeDataService : IJokeDataService
                                             joke.EmotionCounters!.Select(counter => new EmotionResponseDto(counter.Emotion, counter.Counter))
         ));
     }
+
 
 
 }

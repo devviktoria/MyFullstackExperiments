@@ -1,7 +1,48 @@
 GET https://localhost:7027/api/joke/getlatestjokes
 
+###
 GET https://localhost:7027/api/joke/2/upsert
 
+###
 GET https://localhost:7027/api/joke/200/upsert
 
+###
 GET https://localhost:7027/api/joke/upsert
+
+###
+POST https://localhost:7027/api/joke/
+Content-Type: application/json
+
+{
+  "jokeId": 0,
+  "text": "Test joke 1",
+  "source": "",
+  "createdDate": "2026-02-03T18:12:00",
+  "releasedDate": "2026-02-03T18:12:00",
+  "userId": 1,
+  "tags": [
+    "programming",
+    "gaming",
+    "SCI-FI"
+  ]
+}
+
+###
+PUT https://localhost:7027/api/joke/11
+Content-Type: application/json
+
+{
+  "jokeId": 11,
+  "text": "Test joke 11",
+  "source": "",
+  "createdDate": "2026-02-03T18:12:00",
+  "releasedDate": "2026-02-03T18:12:00",
+  "userId": 1,
+  "tags": [
+    "programming",
+    "gaming",
+    "SCI-FI",
+    "cOOking",
+    "cooKING"
+  ]
+}

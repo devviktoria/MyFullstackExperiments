@@ -34,6 +34,25 @@ namespace jcwebapi.Controllers
             return Ok(jokeUpsertDto);
         }
 
+        [HttpPost("")]
+        public async Task<ActionResult> CreateJoke(JokeUpsertDto jokeUpsertDto, CancellationToken cancellationToken)
+        {
+            await _jokeDataService.CreateJoke(jokeUpsertDto, cancellationToken);
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateJoke(int id, JokeUpsertDto jokeUpsertDto, CancellationToken cancellationToken)
+        {
+            if (id != jokeUpsertDto.JokeId)
+            {
+                return BadRequest("ID mismatch");
+            }
+
+            await _jokeDataService.UpdateJoke(jokeUpsertDto, cancellationToken);
+            return Ok();
+        }
+
         [HttpGet(nameof(GetLatestJokes), Name = nameof(GetLatestJokes))]
         public async Task<IEnumerable<JokeSummaryDto>> GetLatestJokes(CancellationToken cancellationToken)
         {

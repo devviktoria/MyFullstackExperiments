@@ -8,5 +8,9 @@ public interface IJokeDataService
 
     public Task<JokeUpsertDto?> GetJokeUpsertData(int id, CancellationToken cancellationToken);
 
+    public Task CreateJoke(JokeUpsertDto jokeUpsertDto, CancellationToken cancellationToken);
+
+    public Task UpdateJoke(JokeUpsertDto jokeUpsertDto, CancellationToken cancellationToken);
+
     public Task<IEnumerable<JokeSummaryDto>> GetLatestJokes(CancellationToken cancellationToken);
 }
