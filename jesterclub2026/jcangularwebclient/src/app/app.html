@@ -1,5 +1,5 @@
 <header class="header-row">
-  <mat-toolbar>
+  <mat-toolbar class="header-toolbar">
     <span class="header-item">
       <a matButton [routerLink]="['/']">{{ title() }}</a>
     </span>
@@ -7,38 +7,44 @@
       <app-layout-userwelcome />
     </span>
     <span class="spacer"></span>
-    <div class="header-item">
+    <!--     <div class="header-item">
       <input type="text" placeholder="Joke content" #filter />
       <button type="submit">Search</button>
-    </div>
+    </div> -->
     <div class="header-item">
       <app-layout-joke-add />
     </div>
     <div>
-      <form>
-        <mat-form-field>
-          <mat-label>Select User</mat-label>
-          <mat-select
-            name="userSelector"
-            [value]="currentUserId"
-            (selectionChange)="onUserChange($event.value)"
-          >
-            @for (userSummary of userSummaryList; track userSummary) {
-              <mat-option [value]="userSummary.id">{{ userSummary.name }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </form>
+      <button matIconButton [matMenuTriggerFor]="userSelect" aria-label="Select user from the list">
+        <mat-icon>manage_accounts</mat-icon>
+      </button>
+      <mat-menu #userSelect="matMenu">
+        @for (userSummary of userSummaryList; track userSummary) {
+          <button mat-menu-item (click)="onUserChange(userSummary.id)">
+            {{ userSummary.name }}
+          </button>
+        }
+      </mat-menu>
     </div>
-    <!-- <div>
-    <form>
-      <select>
-        <option value="os">From OS</option>
-        <option value="light">Light Theme</option>
-        <option value="dark">Dark Theme</option>
-      </select>
-    </form>
-  </div> -->
+    <div>
+      <button matIconButton [matMenuTriggerFor]="themeSelect" aria-label="Change preferred theme">
+        <mat-icon>brightness_6 </mat-icon>
+      </button>
+      <mat-menu #themeSelect="matMenu">
+        <button mat-menu-item (click)="onThemeSelect('light dark')">
+          <mat-icon>contrast</mat-icon>
+          <span>From OS</span>
+        </button>
+        <button mat-menu-item (click)="onThemeSelect('light')">
+          <mat-icon>light_mode</mat-icon>
+          <span>Light mode</span>
+        </button>
+        <button mat-menu-item (click)="onThemeSelect('dark')">
+          <mat-icon>dark_mode</mat-icon>
+          <span>Dark theme</span>
+        </button>
+      </mat-menu>
+    </div>
   </mat-toolbar>
 </header>
 

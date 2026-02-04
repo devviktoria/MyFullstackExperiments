@@ -1,9 +1,18 @@
+@use '@angular/material' as mat;
+
 .spacer {
     flex: 1 1 auto;
 }
 
 .header-row {
-    margin: 1rem;
+    padding: 0.5rem;
+    background-color: var(--mat-sys-secondary-container);
+}
+
+.header-toolbar {
+    @include mat.toolbar-overrides(
+        (container-background-color: var(--mat-sys-secondary-container)
+        ));
 }
 
 .header-item {
