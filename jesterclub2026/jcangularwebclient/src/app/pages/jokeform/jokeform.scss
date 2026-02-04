@@ -1,0 +1,26 @@
+.joke-form {
+  min-width: 400px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.control-full-width {
+  width: 100%;
+}
+
+.joke-form-button-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.joke-form-button-container button {
+  margin: 10px;
+  padding: 20px;
+}
+
+.alert {
+  color: var(--mat-sys-error);
+  font: var(--mat-sys-body-small);
+}

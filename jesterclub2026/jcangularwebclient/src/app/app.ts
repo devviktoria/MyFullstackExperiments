@@ -7,11 +7,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { FakeUserAuthService } from './services/fakeuserauth/fakeuserauth.service';
 import { UserWelcome } from './layout/userwelcome/userwelcome';
+import { JokeAdd } from './layout/jokeadd/jokeadd';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterOutlet, MatButtonModule, MatSelectModule, MatFormFieldModule, MatToolbarModule, UserWelcome],
+  imports: [RouterLink, RouterOutlet, MatButtonModule, MatSelectModule, MatFormFieldModule, MatToolbarModule, UserWelcome, JokeAdd],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

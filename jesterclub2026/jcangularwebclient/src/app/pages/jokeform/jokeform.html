@@ -1,0 +1,93 @@
+<!-- (JokeId, JokeText, Source, CreatedDate, ReleasedDate, ResponseSum, UserId) + Tags-->
+<mat-card class="joke-form" appearance="raised">
+  @if (joke()) {
+    <mat-card-content>
+      <form [formGroup]="jokeForm">
+        <mat-form-field class="control-full-width">
+          <mat-label>Joke</mat-label>
+          <textarea
+            matInput
+            placeholder="Write the joke here ..."
+            [formControl]="jokeForm.controls.text"
+          ></textarea>
+          @if (
+            jokeForm.controls.text.invalid &&
+            (jokeForm.controls.text.dirty || jokeForm.controls.text.touched)
+          ) {
+            <div class="alert">
+              @if (jokeForm.controls.text.hasError('required')) {
+                <div>The joke is required.</div>
+              }
+              @if (jokeForm.controls.text.hasError('minlength')) {
+                <div>The joke must be at least 10 characters long.</div>
+              }
+            </div>
+          }
+        </mat-form-field>
+        <mat-form-field class="control-full-width">
+          <mat-label>Source</mat-label>
+          <input matInput [formControl]="jokeForm.controls.source" />
+          @if (
+            jokeForm.controls.source.invalid &&
+            (jokeForm.controls.source.dirty || jokeForm.controls.source.touched)
+          ) {
+            <div class="alert">
+              @if (jokeForm.controls.source.hasError('minlength')) {
+                <div>The source must be at least 5 characters long.</div>
+              }
+            </div>
+          }
+        </mat-form-field>
+        <mat-form-field class="control-full-width">
+          <mat-label>Tags</mat-label>
+          <mat-chip-grid
+            #jokeTagChipGrid
+            aria-label="Joke tags"
+            [formControl]="jokeForm.controls.tags"
+          >
+            @for (tag of joke()?.tags; track tag) {
+              <mat-chip-row (removed)="removeTag(tag)">
+                {{ tag }}
+                <button matChipRemove [attr.aria-label]="'remove reactive form' + tag">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            }
+          </mat-chip-grid>
+          <input
+            placeholder="New tag..."
+            [matChipInputFor]="jokeTagChipGrid"
+            (matChipInputTokenEnd)="addTag($event)"
+          />
+          @if (
+            jokeForm.controls.tags.invalid &&
+            (jokeForm.controls.tags.dirty || jokeForm.controls.tags.touched)
+          ) {
+            <div class="alert">
+              @if (jokeForm.controls.tags.hasError('minlength')) {
+                <div>You must specify at least one tag.</div>
+              }
+              @if (jokeForm.controls.tags.hasError('maxlength')) {
+                <div>You can specify at most five tags.</div>
+              }
+            </div>
+          }
+        </mat-form-field>
+        <div class="joke-form-button-container">
+          <a matButton="tonal" routerLink="/">Cancel</a>
+          <button matButton="filled" (click)="submit('draft')" [disabled]="!jokeForm.valid">
+            Save As Draft
+          </button>
+          <button matButton="filled" (click)="submit('publish')" [disabled]="!jokeForm.valid">
+            Publish
+          </button>
+        </div>
+        <p>Form Status: {{ jokeForm.status }}</p>
+      </form>
+    </mat-card-content>
+  } @else {
+    <mat-card-content
+      ><span class="alert"> There are no joke service available! </span></mat-card-content
+    >
+  }
+</mat-card>
