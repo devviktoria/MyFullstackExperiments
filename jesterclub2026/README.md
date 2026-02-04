@@ -2,7 +2,12 @@
 
 Jester Club 2026 is a **multilayered social web application** focused on sharing and managing jokes.
 
-This project is a **modern rewrite and architectural refresh** of my earlier *Jester Club* application, rebuilt using **.NET 10** and contemporary backend design principles.
+![The home page of the application](./jcdocs/screenshots/homepageuser.png)
+
+This project is a **modern rewrite and architectural refresh** of my earlier *Jester Club* application, rebuilt using:
+- an **Microsoft SQL Server** database
+- **.NET 10** with contemporary backend design principles for the REST API
+- **Angular 21** with **Angular Material** components for the web client
 
 ⚠️ **Note:**  
 This is **not a finished product**. The primary goal of this repository is to **demonstrate the planned architecture, layering, and design decisions** behind the application.
@@ -12,16 +17,6 @@ This is **not a finished product**. The primary goal of this repository is to **
 ## Technical Overview
 
 The application follows a **layered (enterprise-style) architecture** with a clear separation of concerns.
-
-### Backend Architecture
-
-The backend consists of **three distinct layers**:
-
-1. **Database Access Layer**
-2. **Data Service Layer**
-3. **RESTful Service Layer**
-
-In addition, there is a **separate frontend layer** implemented as a web client.
 
 ---
 
@@ -69,17 +64,16 @@ In addition, there is a **separate frontend layer** implemented as a web client.
 
 ### Web Client
 
-- Planned to be rewritten using the **latest Angular version**
-- Communicates exclusively through the RESTful API
-- The architecture allows additional clients (e.g. React) to be added later without backend changes
+The **Angular Web Client** is the front-end of the Jester Club 2026 website. It provides an interactive interface for users to browse, create, and update jokes. The client communicates with the backend via RESTful Web API calls and handles client-side data transformation, form validation, and navigation.
 
----
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2 and leverages **Angular Material** components for consistent and responsive UI design. The application follows a modular architecture, separating pages, layout components, services, and interfaces to ensure maintainability and scalability.
 
-## Project Status
+## Key Features
 
-- Architecture and layering: ✅ implemented
-- Core API endpoints: 🚧 in progress
-- Frontend rewrite: ⏳ planned
+- Joke listing
+- Fake user authentication
+- Joke insertion
+- Joke update
 
 ---
 
@@ -89,4 +83,7 @@ In addition, there is a **separate frontend layer** implemented as a web client.
 - Apply modern **.NET, EF Core, and Web API best practices**
 - Serve as a **learning and reference project** rather than a production-ready system
 
+## Technical documentation
+
+The technical documantation for this project can be found in the **jcdocs** folder [here](jcdocs/README.md).
 
