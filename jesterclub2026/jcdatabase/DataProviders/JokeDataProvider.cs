@@ -7,9 +7,6 @@ namespace jcdatabase.DataProviders;
 
 public class JokeDataProvider : IJokeDataProvider
 {
-    private const int LatestJokeCount = 10;
-    private const int MostPopularJokeCount = 10;
-
     private readonly JesterClubDbContext _dbContext;
     private readonly ITagDataProvider _tagDataProvider;
 
@@ -83,7 +80,6 @@ public class JokeDataProvider : IJokeDataProvider
         return await _dbContext.Jokes
                 .Where(j => j.ReleasedDate != null)
                 .OrderByDescending(j => j.ReleasedDate)
-                .Take(LatestJokeCount)
                 .Include(j => j.User)
                 .Include(j => j.Tags)
                 .Include(j => j.EmotionCounters)
@@ -96,7 +92,6 @@ public class JokeDataProvider : IJokeDataProvider
         return await _dbContext.Jokes
                 .Where(j => j.ReleasedDate != null)
                 .OrderByDescending(j => j.ResponseSum)
-                .Take(MostPopularJokeCount)
                 .Include(j => j.User)
                 .Include(j => j.Tags)
                 .Include(j => j.EmotionCounters)
