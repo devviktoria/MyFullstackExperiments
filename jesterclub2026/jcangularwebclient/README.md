@@ -8,3 +8,5 @@ The implemented features are:
 
 - Joke listing
 - Fake user authentication
+- Joke insert
+- Joke update
