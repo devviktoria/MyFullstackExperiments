@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using jcdatabase.DataAccess;
 
@@ -11,9 +12,11 @@ using jcdatabase.DataAccess;
 namespace jcdatabase.Migrations
 {
     [DbContext(typeof(JesterClubDbContext))]
-    partial class JesterClubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260209103924_RefineResponseStatistics")]
+    partial class RefineResponseStatistics
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
