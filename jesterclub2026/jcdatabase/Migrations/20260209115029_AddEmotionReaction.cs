@@ -12,17 +12,6 @@ namespace jcdatabase.Migrations
         {
             var spSql = @"CREATE PROCEDURE dbo.AddEmotionReaction(@jokeId int, @userId int, @emotion varchar(10))
 AS
-
-IF (NOT EXISTS (SELECT * FROM dbo.Jokes WHERE JokeId = @jokeId))
-BEGIN 
-    THROW 51000, 'The joke with the given id does not exist.', 1;  
-END
-
-IF (NOT EXISTS (SELECT * FROM dbo.Users WHERE UserId = @userId))
-BEGIN 
-    THROW 51000, 'The user with the given id does not exist.', 1;  
-END
-
 DECLARE @oldEmotion as varchar(10);
 
 SELECT TOP 1 @oldEmotion = Emotion FROM dbo.JokeUserResponses
@@ -31,45 +20,55 @@ ORDER BY CreatedAt DESC;
 
 IF (@emotion = @oldEmotion)
 BEGIN
-	THROW 51000, 'The user has this emotion on the joke already.', 1;
+	THROW 51001, 'The user has this emotion on the joke already.', 1;
 END
+
 
 DECLARE @currentTime AS datetime = SYSDATETIME();
 DECLARE @currentDate AS date = convert(date, @currentTime);
 
-BEGIN TRANSACTION;
+SET XACT_ABORT ON;
 
-INSERT INTO dbo.JokeUserResponses(JokeId, UserId, CreatedAt, Emotion) VALUES (@jokeId, @userId, @currentTime, @emotion);
-
-UPDATE dbo.EmotionCounters
-SET Counter = Counter + 1
-WHERE JokeId = @jokeId AND Emotion = @emotion;
-
-IF (@oldEmotion IS NULL)
-BEGIN
-	UPDATE dbo.Jokes
-	SET ResponseSum = ResponseSum + 1
-	WHERE JokeId = @jokeId;
-END
-ELSE
-BEGIN
+BEGIN TRY
+	BEGIN TRANSACTION;
+	
+	INSERT INTO dbo.JokeUserResponses(JokeId, UserId, CreatedAt, Emotion) VALUES (@jokeId, @userId, @currentTime, @emotion);
+	
 	UPDATE dbo.EmotionCounters
-	SET Counter = Counter - 1
-	WHERE JokeId = @jokeId AND Emotion = @oldEmotion;
-END
-
-IF (NOT EXISTS (SELECT * FROM dbo.ResponseStatistics WHERE JokeId = @jokeId and ResponseDay = @currentDate))
-BEGIN
-	INSERT INTO dbo.ResponseStatistics VALUES(1, @currentDate, 1);
-END
-ELSE
-BEGIN
+	SET Counter = Counter + 1
+	WHERE JokeId = @jokeId AND Emotion = @emotion;
+	
+	IF (@oldEmotion IS NULL)
+	BEGIN
+		UPDATE dbo.Jokes
+		SET ResponseSum = ResponseSum + 1
+		WHERE JokeId = @jokeId;
+	END
+	ELSE
+	BEGIN
+		UPDATE dbo.EmotionCounters
+		SET Counter = Counter - 1
+		WHERE JokeId = @jokeId AND Emotion = @oldEmotion;
+	END
+	
 	UPDATE dbo.ResponseStatistics
 	SET Counter = Counter + 1
 	WHERE JokeId = @jokeId AND ResponseDay = @currentDate;
-END
+	
+	IF @@ROWCOUNT = 0
+	BEGIN
+	    INSERT INTO dbo.ResponseStatistics(JokeId, ResponseDay, Counter)
+	    VALUES(@jokeId, @currentDate, 1);
+	END
+	
+	COMMIT;
+END TRY
+BEGIN CATCH
+    IF @@TRANCOUNT > 0
+        ROLLBACK;
 
-COMMIT;";
+    THROW;
+END CATCH";
             migrationBuilder.Sql(spSql);
         }
 
