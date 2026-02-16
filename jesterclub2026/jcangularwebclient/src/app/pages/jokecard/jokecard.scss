@@ -55,5 +55,13 @@ span.joke-emoji{
 a.joke-emoji {
   margin-right: 0.5rem;
   vertical-align: top;
+  cursor: pointer;
+}
+
+a.joke-emoji-disabled {
+  margin-right: 0.5rem;
+  vertical-align: top;
+  pointer-events: none;
+  cursor: not-allowed;
 }
 

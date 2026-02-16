@@ -11,12 +11,18 @@
   <mat-card-footer
     ><div class="joke-card-emotions">
       @for (emotion of emojiCharacters; track emotion.emotion) {
-        <a
-          matBadge="{{ getEmotionCounter(emotion.emotion) }}"
-          class="joke-emoji"
-          (click)="jokeReaction(emotion.emotion)"
-          ><span class="joke-emoji">{{ emotion.emoji }}</span></a
-        >
+        @if (userAuthService.isUserSignedIn()) {
+          <a
+            matBadge="{{ getEmotionCounter(emotion.emotion) }}"
+            class="joke-emoji"
+            (click)="jokeReaction(emotion.emotion)"
+            ><span class="joke-emoji">{{ emotion.emoji }}</span></a
+          >
+        } @else {
+          <a matBadge="{{ getEmotionCounter(emotion.emotion) }}" class="joke-emoji-disabled"
+            ><span class="joke-emoji">{{ emotion.emoji }}</span></a
+          >
+        }
       }
     </div>
   </mat-card-footer>

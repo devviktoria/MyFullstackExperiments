@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { JokeSummary } from '../../interfaces/jokesummary.data';
 import { JokeReaction } from '../../types/jokereaction.data';
+import { FakeUserAuthService } from '../../services/fakeuserauth/fakeuserauth.service';
 
 @Component({
   selector: 'app-jokecard',
@@ -17,7 +18,7 @@ import { JokeReaction } from '../../types/jokereaction.data';
 export class JokeCard {
   joke = input.required<JokeSummary>();
   jokeReactionEvent = output<JokeReaction>();
-
+  userAuthService = inject(FakeUserAuthService);
 
   private cardClassNames = ['joke-card-yellow', 'joke-card-red', 'joke-card-blue'];
   emojiCharacters = [
@@ -44,6 +45,8 @@ export class JokeCard {
   }
 
   jokeReaction(emotion: string) {
-    this.jokeReactionEvent.emit({ jokeId: this.joke().jokeId, emotion: emotion });
+    if (this.userAuthService.isUserSignedIn()) {
+      this.jokeReactionEvent.emit({ jokeId: this.joke().jokeId, emotion: emotion });
+    }
   }
 }

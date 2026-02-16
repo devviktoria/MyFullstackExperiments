@@ -64,9 +64,16 @@ export class JokeEditorService {
       userId: this.fakeUserAuthService.currentUser().id,
       emotion: jokeReaction.emotion
     };
-    return this.http.patch<JokeSummary>(`${this.jokeBaseUrl}${jokeReaction.jokeId}/${this.reactionJokeUrl}`, counterUpdate, this.httpOptions).pipe(
-      catchError(this.handleError<void>('joke reaction'))
-    );
+    return this.http.patch<JokeSummary>(
+      `${this.jokeBaseUrl}${jokeReaction.jokeId}/${this.reactionJokeUrl}`,
+      counterUpdate,
+      this.httpOptions)
+      .pipe(map(j => ({
+        ...j,
+        text: j.text.replace(/\\n/g, '\n')
+      })),
+        catchError(this.handleError<JokeSummary>('joke reaction', undefined))
+      );
   }
 
   /**
