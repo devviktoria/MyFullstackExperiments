@@ -4,6 +4,9 @@ import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 
 import { JokeUpsertModel } from '../../interfaces/jokeupsertmodel.data';
 import { FakeUserAuthService } from '../fakeuserauth/fakeuserauth.service';
+import { JokeReaction } from '../../types/jokereaction.data';
+import { JokeSummary } from '../../interfaces/jokesummary.data';
+import { JokeReactionUpdate } from '../../interfaces/jokereactionupdate.data';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +16,7 @@ export class JokeEditorService {
   fakeUserAuthService = inject(FakeUserAuthService);
   private jokeBaseUrl = 'http://localhost:5235/api/joke/';
   readonly upsertJokeUrl: string = 'upsert';
+  readonly reactionJokeUrl: string = 'reaction';
   private newJokeUrl = this.jokeBaseUrl + this.upsertJokeUrl;
 
   httpOptions = {
@@ -51,6 +55,17 @@ export class JokeEditorService {
     let url: string = `${this.jokeBaseUrl}${joke.jokeId}`;
     return this.http.put<void>(url, joke, this.httpOptions).pipe(
       catchError(this.handleError<void>('update joke'))
+    );
+  }
+
+  updateJokeReaction(jokeReaction: JokeReaction) {
+    let counterUpdate: JokeReactionUpdate = {
+      jokeId: jokeReaction.jokeId,
+      userId: this.fakeUserAuthService.currentUser().id,
+      emotion: jokeReaction.emotion
+    };
+    return this.http.patch<JokeSummary>(`${this.jokeBaseUrl}${jokeReaction.jokeId}/${this.reactionJokeUrl}`, counterUpdate, this.httpOptions).pipe(
+      catchError(this.handleError<void>('joke reaction'))
     );
   }
 

@@ -10,9 +10,12 @@
   >
   <mat-card-footer
     ><div class="joke-card-emotions">
-      @for (emotionResponse of joke().emotionResponses; track emotionResponse.emotion) {
-        <a matBadge="{{ emotionResponse.counter }}" class="joke-emoji"
-          ><span class="joke-emoji">{{ getEmojiForEmotion(emotionResponse.emotion) }}</span></a
+      @for (emotion of emojiCharacters; track emotion.emotion) {
+        <a
+          matBadge="{{ getEmotionCounter(emotion.emotion) }}"
+          class="joke-emoji"
+          (click)="jokeReaction(emotion.emotion)"
+          ><span class="joke-emoji">{{ emotion.emoji }}</span></a
         >
       }
     </div>

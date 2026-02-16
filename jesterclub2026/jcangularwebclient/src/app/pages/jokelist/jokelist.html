@@ -1,8 +1,8 @@
 <section class="joke-list">
-  @if (jokes$ | async; as jokes) {
-    @if (jokes.length > 0) {
-      @for (joke of jokes; track joke.jokeId) {
-        <app-jokecard [joke]="joke" />
+  @if (jokes()) {
+    @if (jokes()!.length > 0) {
+      @for (joke of jokes(); track joke.jokeId) {
+        <app-jokecard [joke]="joke" (jokeReactionEvent)="jokeReaction($event)" />
       }
     } @else {
       <p>There are no jokes available.</p>
