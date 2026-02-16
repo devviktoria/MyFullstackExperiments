@@ -40,10 +40,21 @@
   font-weight: 500;
 }
 
+.joke-author {
+  text-align: right;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: 0rem;
+  font-size: smaller;
+  font-weight: bolder;
+
+}
+
 .joke-source {
   text-align: right; 
   padding-left: 1rem; 
   padding-right: 1rem;
+  margin-top: 0rem;
   font-size: smaller;
 }
 

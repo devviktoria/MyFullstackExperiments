@@ -3,11 +3,11 @@
     <p class="joke-text">{{ joke().text }}</p>
   </mat-card-content>
   <mat-card-footer
-    ><p class="joke-source">
-      Source:
-      {{ joke().source }}
-    </p></mat-card-footer
-  >
+    ><p class="joke-author">by {{ joke().author }}</p>
+    @if (joke().source.length > 0) {
+      <p class="joke-source">(Source: {{ joke().source }})</p>
+    }
+  </mat-card-footer>
   <mat-card-footer
     ><div class="joke-card-emotions">
       @for (emotion of emojiCharacters; track emotion.emotion) {
