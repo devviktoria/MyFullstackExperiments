@@ -15,7 +15,7 @@
           <a
             matBadge="{{ getEmotionCounter(emotion.emotion) }}"
             class="joke-emoji"
-            (click)="jokeReaction(emotion.emotion)"
+            (click)="jokeReaction(emotion.emotion, $event)"
             ><span class="joke-emoji">{{ emotion.emoji }}</span></a
           >
         } @else {
@@ -25,6 +25,16 @@
         }
       }
     </div>
+    @if (operationInProgress()) {
+      <div
+        class="floating-spinner"
+        [style.left.px]="spinnerPosition()!.x"
+        [style.top.px]="spinnerPosition()!.y"
+      >
+        <mat-progress-spinner mode="indeterminate" [diameter]="20" [strokeWidth]="3">
+        </mat-progress-spinner>
+      </div>
+    }
   </mat-card-footer>
   <mat-card-footer class="joke-card-tags">
     <mat-chip-set aria-label="tags">

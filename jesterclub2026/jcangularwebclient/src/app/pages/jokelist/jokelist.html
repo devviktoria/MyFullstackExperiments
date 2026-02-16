@@ -2,7 +2,11 @@
   @if (jokes()) {
     @if (jokes()!.length > 0) {
       @for (joke of jokes(); track joke.jokeId) {
-        <app-jokecard [joke]="joke" (jokeReactionEvent)="jokeReaction($event)" />
+        <app-jokecard
+          [joke]="joke"
+          [operationInProgress]="loadingMap()[joke.jokeId]"
+          (jokeReactionEvent)="jokeReaction($event)"
+        />
       }
     } @else {
       <p>There are no jokes available.</p>
