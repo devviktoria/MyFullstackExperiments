@@ -20,5 +20,5 @@ public interface IJokeDataProvider
 
     public Task Remove(int id);
 
-    public Task<Joke> IncrementEmotionCounter(int jokeId, string emotion);
+    public Task<Joke?> UpdateEmotionCounters(int jokeId, int userId, string emotion, CancellationToken cancellationToken);
 }

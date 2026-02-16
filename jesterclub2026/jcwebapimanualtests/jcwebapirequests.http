@@ -46,3 +46,33 @@ Content-Type: application/json
     "cooKING"
   ]
 }
+
+###
+PATCH https://localhost:7027/api/joke/2/reaction
+Content-Type: application/json
+
+{
+  "jokeId": 2,
+  "userId": 1,
+  "emotion": "lol"
+}
+
+###
+PATCH https://localhost:7027/api/joke/2/reaction
+Content-Type: application/json
+
+{
+  "jokeId": 2,
+  "userId": 1,
+  "emotion": "happy"
+}
+
+###
+PATCH https://localhost:7027/api/joke/3/reaction
+Content-Type: application/json
+
+{
+  "jokeId": 2,
+  "userId": 1,
+  "emotion": "happy"
+}

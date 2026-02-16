@@ -12,5 +12,7 @@ public interface IJokeDataService
 
     public Task UpdateJoke(JokeUpsertDto jokeUpsertDto, CancellationToken cancellationToken);
 
+    public Task<JokeSummaryDto?> UpdateJokeEmotionCounters(JokeEmotionUpdateDto jokeEmotionUpdateDto, CancellationToken cancellationToken);
+
     public Task<IEnumerable<JokeSummaryDto>> GetLatestJokes(CancellationToken cancellationToken);
 }

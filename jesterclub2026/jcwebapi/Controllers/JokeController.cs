@@ -53,6 +53,23 @@ namespace jcwebapi.Controllers
             return Ok();
         }
 
+        [HttpPatch("{id}/reaction")]
+        public async Task<ActionResult<JokeSummaryDto>> UpdateJokeEmotionCounters(int id, JokeEmotionUpdateDto jokeEmotionUpdateDto, CancellationToken cancellationToken)
+        {
+            if (id != jokeEmotionUpdateDto.JokeId)
+            {
+                return BadRequest("ID mismatch");
+            }
+
+            var jokeSummaryDto = await _jokeDataService.UpdateJokeEmotionCounters(jokeEmotionUpdateDto, cancellationToken);
+            if (jokeSummaryDto is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(jokeSummaryDto);
+        }
+
         [HttpGet(nameof(GetLatestJokes), Name = nameof(GetLatestJokes))]
         public async Task<IEnumerable<JokeSummaryDto>> GetLatestJokes(CancellationToken cancellationToken)
         {

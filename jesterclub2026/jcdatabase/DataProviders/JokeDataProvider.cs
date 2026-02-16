@@ -1,6 +1,7 @@
 using jcdatabase.DataAccess;
 using jcdatabase.DataProviderInterfaces;
 using jcdatabase.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace jcdatabase.DataProviders;
@@ -21,6 +22,7 @@ public class JokeDataProvider : IJokeDataProvider
         return await _dbContext.Jokes
             .Include(j => j.User)
             .Include(j => j.Tags)
+            .Include(j => j.EmotionCounters)
             .AsNoTracking()
             .FirstOrDefaultAsync(j => j.JokeId == id, ct);
     }
@@ -65,9 +67,18 @@ public class JokeDataProvider : IJokeDataProvider
         throw new NotImplementedException();
     }
 
-    public async Task<Joke> IncrementEmotionCounter(int jokeId, string emotion)
+    public async Task<Joke?> UpdateEmotionCounters(int jokeId, int userId, string emotion, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        SqlParameter jokeIdParam = new SqlParameter("@jokeId", jokeId);
+        SqlParameter userIdParam = new SqlParameter("@userId", userId);
+        SqlParameter emotionParam = new SqlParameter("@emotion", emotion);
+        await _dbContext.Database.ExecuteSqlRawAsync(
+            "EXECUTE dbo.AddEmotionReaction @jokeId, @userId, @emotion",
+            jokeIdParam,
+            userIdParam,
+            emotionParam);
+
+        return await GetJokeById(jokeId, cancellationToken);
     }
 
     public async Task<IReadOnlyList<Joke>> GetJokesByUser(string mode, int userId, int jokesPerPage, int pageIndex, CancellationToken cancellationToken)

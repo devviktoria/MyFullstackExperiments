@@ -67,6 +67,27 @@ public class JokeDataService : IJokeDataService
         await jokeDataProvider.UpdateJoke(joke, jokeUpsertDto.Tags, cancellationToken);
     }
 
+    public async Task<JokeSummaryDto?> UpdateJokeEmotionCounters(JokeEmotionUpdateDto jokeEmotionUpdateDto, CancellationToken cancellationToken)
+    {
+        var joke = await jokeDataProvider.UpdateEmotionCounters(
+                                            jokeEmotionUpdateDto.JokeId,
+                                            jokeEmotionUpdateDto.UserId,
+                                            jokeEmotionUpdateDto.Emotion,
+                                            cancellationToken);
+        if (joke is null)
+        {
+            return null;
+        }
+
+        return new JokeSummaryDto(
+                    joke.JokeId,
+                    joke.JokeText,
+                    joke.User is null ? "" : joke.User.UserName,
+                    joke.Source ?? "",
+                    joke.Tags is null ? new List<string>() : joke.Tags.Select(tag => tag.Name),
+                    joke.EmotionCounters!.Select(counter => new EmotionResponseDto(counter.Emotion, counter.Counter))
+                    );
+    }
 
     public async Task<IEnumerable<JokeSummaryDto>> GetLatestJokes(CancellationToken cancellationToken)
     {
