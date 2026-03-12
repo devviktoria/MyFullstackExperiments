@@ -1,0 +1,1 @@
+export type JokeReaction = { jokeId: number, emotion: string }
