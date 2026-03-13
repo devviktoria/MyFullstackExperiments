@@ -37,14 +37,7 @@ export default function ModeSwitch() {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "flex-end",
-        mt: 1,
-        p: 1,
-      }}
-    >
+    <>
       <IconButton color="inherit" onClick={handleOpen}>
         <Brightness6 />
       </IconButton>
@@ -70,6 +63,6 @@ export default function ModeSwitch() {
           Dark mode
         </MenuItem>
       </Menu>
-    </Box>
+    </>
   );
 }

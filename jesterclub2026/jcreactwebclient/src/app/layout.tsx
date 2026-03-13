@@ -10,6 +10,9 @@ import Link from "@mui/material/Link";
 import theme from "@/theme/theme";
 import ModeSwitch from "@/components/ModeSwitch";
 import "./globals.css";
+import { CurrentUserProvider } from "../lib/fakeuserauth/fakeauthcontext";
+import UserWelcome from "@/components/users/userwelcome";
+import UserMenu from "@/components/users/fakeuserauth";
 
 export const metadata: Metadata = {
   title: "Jester Club 2026",
@@ -30,18 +33,27 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            <header>
-              <AppBar position="static" color="primary" enableColorOnDark>
-                <Toolbar>
-                  <Link href="#" underline="none" color="inherit">
-                    Jester Club 2026
-                  </Link>
-                  <span className="spacer"></span>
-                  <ModeSwitch />
-                </Toolbar>
-              </AppBar>
-            </header>
-            {children}
+            <CurrentUserProvider>
+              <header>
+                <AppBar position="static" color="primary" enableColorOnDark>
+                  <Toolbar>
+                    <Link
+                      href="#"
+                      underline="none"
+                      color="inherit"
+                      sx={{ mr: 2 }}
+                    >
+                      Jester Club 2026
+                    </Link>
+                    <UserWelcome />
+                    <span className="spacer"></span>
+                    <UserMenu />
+                    <ModeSwitch />
+                  </Toolbar>
+                </AppBar>
+              </header>
+              {children}
+            </CurrentUserProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
