@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { JokeSummary } from "@/interfaces/jokesummary.data";
-import { GetLatestJokes } from "@/lib/jokelisting.service";
+import { GetLatestJokes } from "@/lib/jokelisting/jokelisting.service";
 import styles from "./Joke.module.css";
 import JokeCard from "./JokeCard";
 

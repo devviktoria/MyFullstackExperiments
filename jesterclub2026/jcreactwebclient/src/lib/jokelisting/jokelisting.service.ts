@@ -1,5 +1,5 @@
 
-import { JokeSummary } from '../interfaces/jokesummary.data';
+import { JokeSummary } from '../../interfaces/jokesummary.data';
 
 const jokeBaseUrl = 'http://localhost:5235/api/joke/';
 const latestJokesUrl = jokeBaseUrl + 'GetLatestJokes';
