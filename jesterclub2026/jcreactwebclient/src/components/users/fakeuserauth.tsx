@@ -9,7 +9,7 @@ import { ManageAccounts } from "@mui/icons-material";
 import { useCurrentUserContext } from "@/lib/fakeuserauth/fakeauthcontext";
 
 export default function UserMenu() {
-  const { user, users, isSignedIn, setUser } = useCurrentUserContext()!;
+  const { users, setUser } = useCurrentUserContext()!;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
@@ -34,7 +34,9 @@ export default function UserMenu() {
       </IconButton>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         {users.map((u) => (
-          <MenuItem onClick={() => selectUser(u.id)}>{u.name}</MenuItem>
+          <MenuItem key={u.id} onClick={() => selectUser(u.id)}>
+            {u.name}
+          </MenuItem>
         ))}
       </Menu>
     </>

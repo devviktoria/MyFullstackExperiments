@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import Chip from "@mui/material/Chip";
@@ -10,9 +9,13 @@ import Stack from "@mui/material/Stack";
 import { JokeSummary } from "@/interfaces/jokesummary.data";
 import styles from "./Joke.module.css";
 import React from "react";
+import { JokeReaction } from "@/types/jokereaction.data";
+import { useCurrentUserContext } from "@/lib/fakeuserauth/fakeauthcontext";
 
 interface JokeCardProps {
   joke: JokeSummary;
+  onReaction: (reaction: JokeReaction) => void;
+  loading: boolean;
 }
 
 const emojiCharacters = [
@@ -23,11 +26,16 @@ const emojiCharacters = [
   { emotion: "lshic", emoji: "🤣" },
 ];
 
-export default function JokeCard({ joke }: JokeCardProps) {
+export default function JokeCard({ joke, onReaction, loading }: JokeCardProps) {
   const cardColor = React.useMemo(() => {
     const colors = ["yellow", "red", "blue"] as const;
     return colors[Math.floor(Math.random() * colors.length)];
   }, []);
+
+  const { isSignedIn } = useCurrentUserContext();
+  const [spinnerPos, setSpinnerPos] = useState<{ x: number; y: number } | null>(
+    null,
+  );
 
   function getEmotionCounter(emotion: string) {
     return (
@@ -67,6 +75,21 @@ export default function JokeCard({ joke }: JokeCardProps) {
               color="error"
               overlap="circular"
               showZero
+              onClick={
+                isSignedIn
+                  ? (event) => {
+                      setSpinnerPos({
+                        x: event.clientX,
+                        y: event.clientY,
+                      });
+
+                      onReaction({
+                        jokeId: joke.jokeId,
+                        emotion: e.emotion,
+                      });
+                    }
+                  : undefined
+              }
             >
               <span className={styles.jokeEmoji}>{e.emoji}</span>
             </Badge>
@@ -78,6 +101,17 @@ export default function JokeCard({ joke }: JokeCardProps) {
             <Chip key={tag} label={tag} variant="outlined" />
           ))}
         </Stack>
+        {loading && spinnerPos && (
+          <div
+            className={styles.floatingSpinner}
+            style={{
+              left: spinnerPos.x,
+              top: spinnerPos.y,
+            }}
+          >
+            <CircularProgress size={20} thickness={5} />
+          </div>
+        )}
       </CardContent>
     </Card>
   );
