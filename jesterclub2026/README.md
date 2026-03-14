@@ -13,13 +13,9 @@ This project is a **modern rewrite and architectural refresh** of my earlier _Je
 ⚠️ **Note:**  
 This is **not a finished product**. The primary goal of this repository is to **demonstrate the planned architecture, layering, and design decisions** behind the application.
 
----
-
 ## Technical Overview
 
 The application follows a **layered (enterprise-style) architecture** with a clear separation of concerns.
-
----
 
 ## Backend Layers
 
@@ -34,8 +30,6 @@ The application follows a **layered (enterprise-style) architecture** with a cle
   - Database-specific query providers / repositories
 - Has **no dependency** on DTOs or Web API concepts
 
----
-
 ### Data Service Layer
 
 - Acts as an **application/service layer**
@@ -45,8 +39,6 @@ The application follows a **layered (enterprise-style) architecture** with a cle
   - Data aggregation
   - Mapping database entities to DTOs
 - Provides clean, API-ready data structures for the Web API layer
-
----
 
 ### RESTful Service Layer
 
@@ -58,8 +50,6 @@ The application follows a **layered (enterprise-style) architecture** with a cle
   - HTTP response generation
   - Dependency injection configuration
 - Does **not** contain database-specific logic
-
----
 
 ## Frontend Layer
 
@@ -92,8 +82,6 @@ This is a **[Next.js 16.1](https://nextjs.org)** project bootstrapped with [`cre
 - Joke emotional reaction handling
 - Joke insertion
 - Joke update
-
----
 
 ## Goals of This Project
 
