@@ -4,7 +4,8 @@ Jester Club 2026 is a **multilayered social web application** focused on sharing
 
 ![The home page of the application](./jcdocs/screenshots/homepageuser.png)
 
-This project is a **modern rewrite and architectural refresh** of my earlier *Jester Club* application, rebuilt using:
+This project is a **modern rewrite and architectural refresh** of my earlier _Jester Club_ application, rebuilt using:
+
 - an **Microsoft SQL Server** database
 - **.NET 10** with contemporary backend design principles for the REST API
 - **Angular 21** with **Angular Material** components for the web client
@@ -62,7 +63,7 @@ The application follows a **layered (enterprise-style) architecture** with a cle
 
 ## Frontend Layer
 
-### Web Client
+### Angular Web Client
 
 The **Angular Web Client** is the front-end of the Jester Club 2026 website. It provides an interactive interface for users to browse, create, and update jokes. The client communicates with the backend via RESTful Web API calls and handles client-side data transformation, form validation, and navigation.
 
@@ -71,7 +72,24 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 ## Key Features
 
 - Joke listing
+- Light and dark mode switch
 - Fake user authentication
+- Joke emotional reaction handling
+- Joke insertion
+- Joke update
+
+### React Webclient
+
+The **React Web Client** is the front-end of the Jester Club 2026 website. It provides an interactive interface for users to browse, create, and update jokes. The client communicates with the backend via RESTful Web API calls and handles client-side data transformation, form validation, and navigation.
+
+This is a **[Next.js 16.1](https://nextjs.org)** project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) and leverages **MUI 7.3** components for consistent and responsive UI design. The application follows a modular architecture, separating pages, layout components, services, and interfaces to ensure maintainability and scalability.
+
+## Key Features
+
+- Joke listing
+- Light and dark mode switch
+- Fake user authentication
+- Joke emotional reaction handling
 - Joke insertion
 - Joke update
 
@@ -86,4 +104,3 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 ## Technical documentation
 
 The technical documantation for this project can be found in the **jcdocs** folder [here](jcdocs/README.md).
-

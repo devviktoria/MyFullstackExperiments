@@ -9,4 +9,6 @@ This is a **[Next.js 16.1](https://nextjs.org)** project bootstrapped with [`cre
 - Joke listing
 - Light and dark mode switch
 - Fake user authentication
-- Joke emotional reaktion handling
+- Joke emotional reaction handling
+- Joke insertion
+- Joke update
