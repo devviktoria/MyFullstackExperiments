@@ -6,6 +6,8 @@ const users: UserSummary[] = [
   { id: 0, name: "No one" },
   { id: 1, name: "Viki" },
   { id: 2, name: "Charles" },
+  { id: 3, name: "Emily" },
+  { id: 4, name: "Jack" },
 ];
 
 type CurrentUserContextType = {

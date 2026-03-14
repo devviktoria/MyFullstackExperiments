@@ -7,7 +7,7 @@ import { GetLatestJokes } from "@/lib/jokelisting/jokelisting.service";
 import styles from "./Joke.module.css";
 import JokeCard from "./JokeCard";
 import { JokeReaction } from "@/types/jokereaction.data";
-import { updateJokeReaction } from "@/lib/jokeeditor/jokeeditor.service";
+import { UpdateJokeReaction } from "@/lib/jokeeditor/jokeeditor.service";
 import { useCurrentUserContext } from "@/lib/fakeuserauth/fakeauthcontext";
 
 export default function JokeList() {
@@ -27,7 +27,7 @@ export default function JokeList() {
     }));
 
     try {
-      const updatedJoke = await updateJokeReaction(jokeReaction, user.id);
+      const updatedJoke = await UpdateJokeReaction(jokeReaction, user.id);
 
       setJokes((list) =>
         list.map((j) => (j.jokeId === updatedJoke.jokeId ? updatedJoke : j)),

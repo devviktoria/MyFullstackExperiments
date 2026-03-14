@@ -8,3 +8,8 @@ body {
   flex: 1 1 auto;
 }
 
+.jokeForm {
+  min-width: 400px;
+  max-width: 800px;
+  margin: auto;
+}

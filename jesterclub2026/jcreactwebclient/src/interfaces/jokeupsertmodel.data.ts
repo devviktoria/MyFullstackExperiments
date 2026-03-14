@@ -3,7 +3,7 @@ export interface JokeUpsertModel {
     text: string,
     source: string,
     createdDate: Date,
-    releasedDate: Date,
+    releasedDate: Date | null,
     userId: number,
     tags: string[]
 }

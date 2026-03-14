@@ -11,8 +11,9 @@ import theme from "@/theme/theme";
 import ModeSwitch from "@/components/ModeSwitch";
 import "./globals.css";
 import { CurrentUserProvider } from "../lib/fakeuserauth/fakeauthcontext";
-import UserWelcome from "@/components/users/userwelcome";
-import UserMenu from "@/components/users/fakeuserauth";
+import UserWelcome from "@/components/users/UserWelcome";
+import UserMenu from "@/components/users/FakeUserAuth";
+import UserPostJoke from "@/components/users/UserPostJoke";
 
 export const metadata: Metadata = {
   title: "Jester Club 2026",
@@ -47,6 +48,7 @@ export default function RootLayout({
                     </Link>
                     <UserWelcome />
                     <span className="spacer"></span>
+                    <UserPostJoke />
                     <UserMenu />
                     <ModeSwitch />
                   </Toolbar>
