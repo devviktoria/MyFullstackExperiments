@@ -8,6 +8,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 - Joke listing
 - Fake user authentication
+- Joke emotional reaction handling
 - Joke insertion
 - Joke update
 
@@ -20,9 +21,10 @@ This project can be found in the **jcangularwebclient** folder.
 All source code is located in the **src/app** folder, organized as follows:
 
 - **interfaces** folder: Contains the DTOs used for client-server communication.
-- **layout** folder: Contains layout components, such as the *Add Joke* button and the *User Welcome* component.
-- **pages** folder: Contains routed page components, such as the *Joke List* and the *Joke Form* components.
+- **layout** folder: Contains layout components, such as the _Add Joke_ button and the _User Welcome_ component.
+- **pages** folder: Contains routed page components, such as the _Joke List_ and the _Joke Form_ components.
 - **services** folder: Contains services for fake user authentication, joke listing, and joke editing.
+- **types** folder: Contains types used for client-server communication.
 
 ## Screenshots
 

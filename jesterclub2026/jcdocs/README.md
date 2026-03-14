@@ -1,11 +1,11 @@
 # Jester Club 2026 Technical Documentation
 
-The Jester Club 2026 project is a web application for managing and sharing jokes. 
+The Jester Club 2026 project is a web application for managing and sharing jokes.
 It follows a multi-layered architecture with a **SQL Server database**, **ASP.NET Core Web API** backend, and an **Angular 21** front-end.
 
 ![Homepage](screenshots/homepage.png)
 
-This documentation describes the architecture, project structure, and key implementation details. 
+This documentation describes the architecture, project structure, and key implementation details.
 Screenshots of the application can be found in the **screenshots** folder.
 
 ## Backend Documentation
@@ -18,5 +18,4 @@ Screenshots of the application can be found in the **screenshots** folder.
 ## Frontend Documentation
 
 - [Angular 21 Web Client Project](docs/angularwebclientproject.md) – The Angular client application with pages, services, and UI components.
-
-
+- [React Web Client Project](docs/reactwebclientproject.md) – The React client application with pages, services, and UI components.

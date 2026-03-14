@@ -8,5 +8,6 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 - Joke listing
 - Fake user authentication
+- Joke emotional reaction handling
 - Joke insertion
 - Joke update
