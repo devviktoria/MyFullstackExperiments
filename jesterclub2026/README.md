@@ -69,7 +69,7 @@ The **Angular Web Client** is the front-end of the Jester Club 2026 website. It 
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2 and leverages **Angular Material** components for consistent and responsive UI design. The application follows a modular architecture, separating pages, layout components, services, and interfaces to ensure maintainability and scalability.
 
-## Key Features
+#### Key Features
 
 - Joke listing
 - Light and dark mode switch
@@ -84,7 +84,7 @@ The **React Web Client** is the front-end of the Jester Club 2026 website. It pr
 
 This is a **[Next.js 16.1](https://nextjs.org)** project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) and leverages **MUI 7.3** components for consistent and responsive UI design. The application follows a modular architecture, separating pages, layout components, services, and interfaces to ensure maintainability and scalability.
 
-## Key Features
+#### Key Features
 
 - Joke listing
 - Light and dark mode switch
