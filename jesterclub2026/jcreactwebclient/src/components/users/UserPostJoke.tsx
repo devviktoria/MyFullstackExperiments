@@ -8,7 +8,7 @@ export default function UserWelcome() {
   const { isSignedIn } = useCurrentUserContext()!;
 
   return isSignedIn ? (
-    <Link href="/upsert">
+    <Link href="/jokeupsert">
       <Fab variant="extended">
         <PostAddIcon sx={{ mr: 1 }} />
         Post
