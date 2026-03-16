@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 import Typography from "@mui/material/Typography";
@@ -30,7 +30,11 @@ interface JokeFormProps {
 }
 
 export default function JokeForm({ jokeId }: JokeFormProps) {
+  const params = useSearchParams();
+  const returnTo = params.get("returnTo");
+
   const isEditMode = !!jokeId;
+
   const [joke, setJoke] = useState<JokeUpsertModel>();
   const [loading, setLoading] = useState(true);
   const { user, isSignedIn } = useCurrentUserContext();
@@ -142,7 +146,26 @@ export default function JokeForm({ jokeId }: JokeFormProps) {
       setErrorMsg("Save error!" + err);
     }
 
-    router.push("/");
+    if (mode === "draft") {
+      router.push(`/${user.id}?tab=drafts`);
+    } else if (
+      mode === "publish" &&
+      (returnTo === "drafts" || returnTo === "published")
+    ) {
+      router.push(`/${user.id}?tab=published`);
+    } else {
+      router.push("/");
+    }
+  }
+
+  function handleCancel() {
+    if (returnTo === "drafts") {
+      router.push(`/${user.id}?tab=drafts`);
+    } else if (returnTo === "published") {
+      router.push(`/${user.id}?tab=published`);
+    } else {
+      router.push("/");
+    }
   }
 
   return (
@@ -208,9 +231,9 @@ export default function JokeForm({ jokeId }: JokeFormProps) {
             />
           </CardContent>
           <CardActions>
-            <Link href="/">
-              <Button variant="contained">Cancel</Button>
-            </Link>
+            <Button variant="contained" onClick={handleCancel}>
+              Cancel
+            </Button>
             <Button
               type="button"
               variant="contained"
@@ -219,7 +242,6 @@ export default function JokeForm({ jokeId }: JokeFormProps) {
             >
               Save As Draft
             </Button>
-
             <Button
               type="button"
               variant="contained"

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
@@ -13,7 +14,8 @@ import "./globals.css";
 import { CurrentUserProvider } from "../lib/fakeuserauth/fakeauthcontext";
 import UserWelcome from "@/components/users/UserWelcome";
 import UserMenu from "@/components/users/FakeUserAuth";
-import UserPostJoke from "@/components/users/UserPostJoke";
+import UserPostJoke from "@/components/users/UserPostJokeButton";
+import UserProfileButton from "@/components/users/UserProfileButton";
 
 export const metadata: Metadata = {
   title: "Jester Club 2026",
@@ -27,19 +29,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head></head>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+          rel="stylesheet"
+        />
+      </head>
       <body>
-        <InitColorSchemeScript attribute="class" />
-        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <ThemeProvider theme={theme}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            <CurrentUserProvider>
+        <CurrentUserProvider>
+          <InitColorSchemeScript attribute="class" />
+          <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+            <ThemeProvider theme={theme}>
+              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+              <CssBaseline />
               <header>
                 <AppBar position="static" color="primary" enableColorOnDark>
                   <Toolbar>
                     <Link
-                      href="#"
+                      href="/"
                       underline="none"
                       color="inherit"
                       sx={{ mr: 2 }}
@@ -48,6 +55,7 @@ export default function RootLayout({
                     </Link>
                     <UserWelcome />
                     <span className="spacer"></span>
+                    <UserProfileButton />
                     <UserPostJoke />
                     <UserMenu />
                     <ModeSwitch />
@@ -55,9 +63,9 @@ export default function RootLayout({
                 </AppBar>
               </header>
               {children}
-            </CurrentUserProvider>
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+            </ThemeProvider>
+          </AppRouterCacheProvider>
+        </CurrentUserProvider>
       </body>
     </html>
   );

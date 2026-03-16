@@ -1,16 +1,18 @@
 "use client";
 import Link from "next/link";
 import Fab from "@mui/material/Fab";
-import PostAddIcon from "@mui/icons-material/PostAdd";
+import Icon from "@mui/material/Icon";
 import { useCurrentUserContext } from "@/lib/fakeuserauth/fakeauthcontext";
 
-export default function UserWelcome() {
+export default function UserPostJokeButton() {
   const { isSignedIn } = useCurrentUserContext()!;
 
   return isSignedIn ? (
     <Link href="/jokeupsert">
       <Fab variant="extended">
-        <PostAddIcon sx={{ mr: 1 }} />
+        <Icon className="material-symbols-outlined" sx={{ mr: 1 }}>
+          sticker_add
+        </Icon>
         Post
       </Fab>
     </Link>
