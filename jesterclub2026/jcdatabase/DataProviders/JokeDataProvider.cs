@@ -1,8 +1,11 @@
+using System.Linq.Expressions;
 using jcdatabase.DataAccess;
 using jcdatabase.DataProviderInterfaces;
 using jcdatabase.Models;
+using jcdomain;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace jcdatabase.DataProviders;
 
@@ -81,11 +84,6 @@ public class JokeDataProvider : IJokeDataProvider
         return await GetJokeById(jokeId, cancellationToken);
     }
 
-    public async Task<IReadOnlyList<Joke>> GetJokesByUser(string mode, int userId, int jokesPerPage, int pageIndex, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<IReadOnlyList<Joke>> GetLatestJokes(CancellationToken cancellationToken)
     {
         return await _dbContext.Jokes
@@ -108,5 +106,32 @@ public class JokeDataProvider : IJokeDataProvider
                 .Include(j => j.EmotionCounters)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
+    }
+
+    public async Task<IReadOnlyList<Joke>> GetJokesByUser(int userId, JokesByUserListMode mode, CancellationToken cancellationToken)
+    {
+        IQueryable<Joke> jokes = _dbContext.Jokes.Where(j => j.UserId == userId);
+
+        switch (mode)
+        {
+            case JokesByUserListMode.Published:
+                jokes = jokes.Where(j => j.ReleasedDate != null)
+                            .OrderByDescending(j => j.ReleasedDate);
+                break;
+            case JokesByUserListMode.Draft:
+                jokes = jokes.Where(j => j.ReleasedDate == null)
+                            .OrderByDescending(j => j.CreatedDate);
+                break;
+            default:
+                jokes = jokes.OrderByDescending(j => j.ReleasedDate)
+                            .ThenByDescending(j => j.CreatedDate);
+                break;
+        }
+
+        return await jokes.Include(j => j.User)
+                        .Include(j => j.Tags)
+                        .Include(j => j.EmotionCounters)
+                        .AsNoTracking()
+                        .ToListAsync(cancellationToken);
     }
 }
