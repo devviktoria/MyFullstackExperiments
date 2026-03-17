@@ -67,7 +67,9 @@ export default function JokeCard({
       }}
     >
       <CardContent>
-        <Typography variant="body1">{joke.text}</Typography>
+        <Typography variant="body1" sx={{ whiteSpace: "pre-line" }}>
+          {joke.text}
+        </Typography>
         <Typography variant="body2" align="right" sx={{ fontWeight: "bold" }}>
           by:{" "}
           <MuiLink
