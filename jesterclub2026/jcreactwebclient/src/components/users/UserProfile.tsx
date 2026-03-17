@@ -38,6 +38,8 @@ export default function UserProfile({ userId }: UserProfileProps) {
     isDraftsVisible && tabParam === "drafts" ? "1" : "0",
   );
 
+  const effectiveTabIndex = isDraftsVisible ? tabIndex : "0";
+
   const [requestedUser, setRequestedUser] = useState<UserSummary | undefined>(
     undefined,
   );
@@ -59,16 +61,20 @@ export default function UserProfile({ userId }: UserProfileProps) {
   };
 
   useEffect(() => {
+    if (!isDraftsVisible && tabIndex != "0") {
+      setTabIndex("0");
+    }
+  }, [isDraftsVisible, tabIndex]);
+
+  useEffect(() => {
     async function loadUser() {
       try {
-        // 👉 Ha saját profil
         if (isSignedIn && user.userId === userId) {
           setRequestedUser(user);
           setRequestedUserLoaded(true);
           return;
         }
 
-        // 👉 Ha más user
         const requestedUser = await GetUserInformation(userId);
         setRequestedUser(requestedUser);
         setRequestedUserLoaded(true);
@@ -108,7 +114,7 @@ export default function UserProfile({ userId }: UserProfileProps) {
     if (tabIndex === "1" && isDraftsVisible && !draftLoaded) {
       loadDrafts();
     }
-  }, [tabIndex, userId, isDraftsVisible]);
+  }, [tabIndex, userId, isDraftsVisible, publishedLoaded, draftLoaded]);
 
   if (requestedUserLoaded && !requestedUser) {
     return (
@@ -134,7 +140,7 @@ export default function UserProfile({ userId }: UserProfileProps) {
         >
           {requestedUser?.userName}
         </Typography>
-        <TabContext value={tabIndex}>
+        <TabContext value={effectiveTabIndex}>
           <Box sx={{ borderBottom: 2, borderColor: "divider" }}>
             <TabList onChange={handleTabChange}>
               <Tab label="Published Jokes" value="0" />

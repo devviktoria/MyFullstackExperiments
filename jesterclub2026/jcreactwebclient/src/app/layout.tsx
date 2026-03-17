@@ -1,12 +1,13 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
+
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Link from "@mui/material/Link";
 
 import theme from "@/theme/theme";
 import ModeSwitch from "@/components/ModeSwitch";
@@ -45,14 +46,7 @@ export default function RootLayout({
               <header>
                 <AppBar position="static" color="primary" enableColorOnDark>
                   <Toolbar>
-                    <Link
-                      href="/"
-                      underline="none"
-                      color="inherit"
-                      sx={{ mr: 2 }}
-                    >
-                      Jester Club 2026
-                    </Link>
+                    <Link href="/">Jester Club 2026</Link>
                     <UserWelcome />
                     <span className="spacer"></span>
                     <UserProfileButton />
