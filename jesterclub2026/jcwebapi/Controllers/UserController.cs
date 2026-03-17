@@ -15,6 +15,18 @@ namespace jcwebapi.Controllers
             _userDataService = userDataService;
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserInformationDto>> GetUserInformation(int id, CancellationToken cancellationToken)
+        {
+            UserInformationDto? userInformationDto = await _userDataService.GetUserInformation(id, cancellationToken);
+            if (userInformationDto is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(userInformationDto);
+        }
+
         [HttpGet("{id}/jokes/published")]
         public async Task<IEnumerable<JokeSummaryDto>> GetPublishedJokes(int id, CancellationToken cancellationToken)
         {

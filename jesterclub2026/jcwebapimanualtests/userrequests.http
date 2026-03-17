@@ -1,4 +1,16 @@
+GET https://localhost:7027/api/user/3
+
+###
+GET https://localhost:7027/api/user/2000
+
+###
 GET https://localhost:7027/api/user/3/jokes/published
 
 ###
 GET https://localhost:7027/api/user/3/jokes/drafts
+
+###
+GET https://localhost:7027/api/user/2000/jokes/published
+
+###
+GET https://localhost:7027/api/user/2000/jokes/drafts

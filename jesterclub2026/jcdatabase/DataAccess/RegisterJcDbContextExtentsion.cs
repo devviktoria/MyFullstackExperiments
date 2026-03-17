@@ -16,6 +16,7 @@ public static class RegisterJcDbContextExtentsion
 
         services.AddScoped<ITagDataProvider, TagDataProvider>();
         services.AddScoped<IJokeDataProvider, JokeDataProvider>();
+        services.AddScoped<IUserDataProvider, UserDataProvider>();
 
         return services;
     }
