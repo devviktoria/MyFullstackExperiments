@@ -10,7 +10,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import CircularProgress from "@mui/material/CircularProgress";
+import Skeleton from "@mui/material/Skeleton";
 
 import styles from "@/components/jokes/Joke.module.css";
 import { useCurrentUserContext } from "@/lib/fakeuserauth/fakeauthcontext";
@@ -132,14 +132,23 @@ export default function UserProfile({ userId }: UserProfileProps) {
   return (
     <Box sx={{ width: "75%", typography: "body1", mx: "auto", mt: 2 }}>
       <Stack spacing={2}>
-        <Typography
-          variant="h4"
-          gutterBottom
-          align="center"
-          sx={{ mt: 2, fontWeight: 500 }}
-        >
-          {requestedUser?.userName}
-        </Typography>
+        {requestedUserLoaded ? (
+          <Typography
+            variant="h4"
+            gutterBottom
+            align="center"
+            sx={{ mt: 2, fontWeight: 500 }}
+          >
+            {requestedUser?.userName}
+          </Typography>
+        ) : (
+          <Skeleton
+            variant="rectangular"
+            width={250}
+            height={40}
+            sx={{ mx: "auto", mt: 2, borderRadius: 2 }}
+          />
+        )}
         <TabContext value={effectiveTabIndex}>
           <Box sx={{ borderBottom: 2, borderColor: "divider" }}>
             <TabList onChange={handleTabChange}>
@@ -148,7 +157,22 @@ export default function UserProfile({ userId }: UserProfileProps) {
             </TabList>
           </Box>
           <TabPanel value="0">
-            {publishedJokes.length > 0 ? (
+            {!publishedLoaded ? (
+              <Stack spacing={2}>
+                {Array.from(new Array(3)).map((_, index) => (
+                  <Skeleton
+                    key={index}
+                    variant="rectangular"
+                    height={120}
+                    animation="wave"
+                    sx={{
+                      borderRadius: 2,
+                      bgcolor: "jokeCard.blue",
+                    }}
+                  />
+                ))}
+              </Stack>
+            ) : publishedJokes.length > 0 ? (
               <section className={styles.jokelist}>
                 {publishedJokes.map((joke) => (
                   <JokeCard key={joke.jokeId} joke={joke} />
