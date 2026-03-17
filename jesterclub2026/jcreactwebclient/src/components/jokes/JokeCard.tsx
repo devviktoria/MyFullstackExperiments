@@ -12,6 +12,7 @@ import Badge from "@mui/material/Badge";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import MuiLink from "@mui/material/Link";
 
 import styles from "./Joke.module.css";
 
@@ -67,11 +68,17 @@ export default function JokeCard({
     >
       <CardContent>
         <Typography variant="body1">{joke.text}</Typography>
-        <Link href={`/${joke.authorId}`}>
-          <Typography variant="body2" align="right" sx={{ fontWeight: "bold" }}>
+        <Typography variant="body2" align="right" sx={{ fontWeight: "bold" }}>
+          by:{" "}
+          <MuiLink
+            href={`/${joke.authorId}`}
+            component={Link}
+            color="inherit"
+            underline="hover"
+          >
             {joke.authorName}
-          </Typography>
-        </Link>
+          </MuiLink>
+        </Typography>
         {joke.source && (
           <Typography
             variant="body2"

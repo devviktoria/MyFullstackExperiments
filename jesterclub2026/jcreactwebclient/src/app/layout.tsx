@@ -8,6 +8,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 
 import theme from "@/theme/theme";
 import ModeSwitch from "@/components/ModeSwitch";
@@ -46,7 +47,20 @@ export default function RootLayout({
               <header>
                 <AppBar position="static" color="primary" enableColorOnDark>
                   <Toolbar>
-                    <Link href="/">Jester Club 2026</Link>
+                    <Link
+                      href="/"
+                      style={{
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      <Typography
+                        variant="h5"
+                        sx={{ fontWeight: "bold", mr: 2 }}
+                      >
+                        Jester Club 2026
+                      </Typography>
+                    </Link>
                     <UserWelcome />
                     <span className="spacer"></span>
                     <UserProfileButton />
