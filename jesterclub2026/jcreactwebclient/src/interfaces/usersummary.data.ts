@@ -1,4 +1,5 @@
 export interface UserSummary {
-    id: number,
-    name: string
+    userId: number,
+    name: string,
+    email?: string
 }

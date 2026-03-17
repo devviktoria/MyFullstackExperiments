@@ -56,7 +56,7 @@ export default function JokeForm({ jokeId }: JokeFormProps) {
       try {
         const joke = isEditMode
           ? await GetJokeUpsertData(Number(jokeId))
-          : await GetNewJokeUpsertData(user.id);
+          : await GetNewJokeUpsertData(user.userId);
         setJoke(joke);
       } catch (err) {
         console.error(err);
@@ -147,12 +147,12 @@ export default function JokeForm({ jokeId }: JokeFormProps) {
     }
 
     if (mode === "draft") {
-      router.push(`/${user.id}?tab=drafts`);
+      router.push(`/${user.userId}?tab=drafts`);
     } else if (
       mode === "publish" &&
       (returnTo === "drafts" || returnTo === "published")
     ) {
-      router.push(`/${user.id}?tab=published`);
+      router.push(`/${user.userId}?tab=published`);
     } else {
       router.push("/");
     }
@@ -160,9 +160,9 @@ export default function JokeForm({ jokeId }: JokeFormProps) {
 
   function handleCancel() {
     if (returnTo === "drafts") {
-      router.push(`/${user.id}?tab=drafts`);
+      router.push(`/${user.userId}?tab=drafts`);
     } else if (returnTo === "published") {
-      router.push(`/${user.id}?tab=published`);
+      router.push(`/${user.userId}?tab=published`);
     } else {
       router.push("/");
     }

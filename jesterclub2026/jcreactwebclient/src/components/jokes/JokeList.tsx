@@ -27,7 +27,7 @@ export default function JokeList() {
     }));
 
     try {
-      const updatedJoke = await UpdateJokeReaction(jokeReaction, user.id);
+      const updatedJoke = await UpdateJokeReaction(jokeReaction, user.userId);
 
       setJokes((list) =>
         list.map((j) => (j.jokeId === updatedJoke.jokeId ? updatedJoke : j)),

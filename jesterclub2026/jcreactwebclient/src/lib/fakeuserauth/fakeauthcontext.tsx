@@ -3,11 +3,11 @@ import { createContext, useContext, useState } from "react";
 import { UserSummary } from "@/interfaces/usersummary.data";
 
 const users: UserSummary[] = [
-  { id: 0, name: "No one" },
-  { id: 1, name: "Viki" },
-  { id: 2, name: "Charles" },
-  { id: 3, name: "Emily" },
-  { id: 4, name: "Jack" },
+  { userId: 0, name: "No one" },
+  { userId: 1, name: "Viki" },
+  { userId: 2, name: "Charles" },
+  { userId: 3, name: "Emily" },
+  { userId: 4, name: "Jack" },
 ];
 
 type CurrentUserContextType = {
@@ -27,7 +27,7 @@ export function CurrentUserProvider({
   const [user, setUserState] = useState<UserSummary>(users[0]);
 
   const setUser = (id: number) => {
-    const found = users.find((u) => u.id === id) ?? users[0];
+    const found = users.find((u) => u.userId === id) ?? users[0];
     setUserState(found);
   };
 
@@ -36,7 +36,7 @@ export function CurrentUserProvider({
       value={{
         user,
         users,
-        isSignedIn: user.id != 0,
+        isSignedIn: user.userId != 0,
         setUser,
       }}
     >

@@ -31,7 +31,7 @@ export default function UserProfile({ userId }: UserProfileProps) {
   const tabParam = searchParams.get("tab");
 
   const { user, isSignedIn } = useCurrentUserContext();
-  const isDraftsVisible = isSignedIn && user.id === userId;
+  const isDraftsVisible = isSignedIn && user.userId === userId;
 
   const [tabIndex, setTabIndex] = React.useState(
     isDraftsVisible && tabParam === "drafts" ? 1 : 0,
@@ -44,7 +44,7 @@ export default function UserProfile({ userId }: UserProfileProps) {
 
   let requestedUser: UserSummary | undefined = undefined;
 
-  if (isSignedIn && user.id === userId) {
+  if (isSignedIn && user.userId === userId) {
     requestedUser = user;
   } else {
     // We have to query the user, but this is not implemented yet!

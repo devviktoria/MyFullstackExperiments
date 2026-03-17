@@ -8,7 +8,7 @@ export default function UserProfileButton() {
   const { user, isSignedIn } = useCurrentUserContext()!;
 
   return isSignedIn ? (
-    <Link href={`/${user.id}`}>
+    <Link href={`/${user.userId}`}>
       <Fab variant="extended" sx={{ mr: 1 }}>
         <Icon className="material-symbols-outlined" sx={{ mr: 1 }}>
           sticker
