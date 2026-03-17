@@ -11,6 +11,8 @@ import TabPanel from "@mui/lab/TabPanel";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Skeleton from "@mui/material/Skeleton";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 import styles from "@/components/jokes/Joke.module.css";
 import { useCurrentUserContext } from "@/lib/fakeuserauth/fakeauthcontext";
@@ -39,6 +41,9 @@ export default function UserProfile({ userId }: UserProfileProps) {
   );
 
   const effectiveTabIndex = isDraftsVisible ? tabIndex : "0";
+
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const [requestedUser, setRequestedUser] = useState<UserSummary | undefined>(
     undefined,
@@ -79,7 +84,9 @@ export default function UserProfile({ userId }: UserProfileProps) {
         setRequestedUser(requestedUser);
         setRequestedUserLoaded(true);
       } catch (err) {
-        console.error(err);
+        setRequestedUserLoaded(true);
+        setErrorMsg("Load error: " + (err as Error).message);
+        setOpenSnackbar(true);
       }
     }
 
@@ -118,14 +125,21 @@ export default function UserProfile({ userId }: UserProfileProps) {
 
   if (requestedUserLoaded && !requestedUser) {
     return (
-      <Typography
-        variant="body1"
-        gutterBottom
-        align="center"
-        sx={{ mt: 2, fontWeight: 500 }}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={5000}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        onClose={() => setOpenSnackbar(false)}
       >
-        Failed to load user!
-      </Typography>
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {errorMsg}
+        </Alert>
+      </Snackbar>
     );
   }
 
