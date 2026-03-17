@@ -1,5 +1,6 @@
 using jcdatabase.DataAccess;
 using jcdataservice.DataServiceRegistration;
+using jcdomain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddOpenApi();
 
 const string JesterClubSpecificOrigins = "_JesterClubSpecificOrigins";
 string connString = builder.Configuration.GetConnectionString("jcwebapi") ?? "";
+builder.Services.Configure<PaginationOptions>(
+    builder.Configuration.GetSection("Pagination"));
 builder.Services.AddSqlServerServices(connString);
 builder.Services.AddDataServices();
 builder.Services.AddControllers();

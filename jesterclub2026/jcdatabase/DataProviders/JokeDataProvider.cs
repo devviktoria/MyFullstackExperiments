@@ -96,6 +96,20 @@ public class JokeDataProvider : IJokeDataProvider
                 .ToListAsync(cancellationToken);
     }
 
+    public async Task<IReadOnlyList<Joke>> GetLatestJokes(int page, int pageSize, CancellationToken cancellationToken)
+    {
+        return await _dbContext.Jokes
+                .Where(j => j.ReleasedDate != null)
+                .OrderByDescending(j => j.ReleasedDate)
+                .Include(j => j.User)
+                .Include(j => j.Tags)
+                .Include(j => j.EmotionCounters)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .AsNoTracking()
+                .ToListAsync(cancellationToken);
+    }
+
     public async Task<IReadOnlyList<Joke>> GetMostPopularJokes(CancellationToken cancellationToken)
     {
         return await _dbContext.Jokes

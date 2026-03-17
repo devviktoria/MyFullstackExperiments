@@ -70,10 +70,17 @@ namespace jcwebapi.Controllers
             return Ok(jokeSummaryDto);
         }
 
+        //I kept this for backward comaptibility with the Angular client
         [HttpGet(nameof(GetLatestJokes), Name = nameof(GetLatestJokes))]
         public async Task<IEnumerable<JokeSummaryDto>> GetLatestJokes(CancellationToken cancellationToken)
         {
             return await _jokeDataService.GetLatestJokes(cancellationToken);
+        }
+
+        [HttpGet("getlatestjokes/{page}")]
+        public async Task<IEnumerable<JokeSummaryDto>> GetLatestJokes(int page, CancellationToken cancellationToken)
+        {
+            return await _jokeDataService.GetLatestJokes(page, cancellationToken);
         }
     }
 }

@@ -13,6 +13,8 @@ public interface IJokeDataProvider
 
     public Task<IReadOnlyList<Joke>> GetLatestJokes(CancellationToken cancellationToken);
 
+    public Task<IReadOnlyList<Joke>> GetLatestJokes(int page, int pageSize, CancellationToken cancellationToken);
+
     public Task<IReadOnlyList<Joke>> GetMostPopularJokes(CancellationToken cancellationToken);
 
     public Task CreateJoke(Joke joke, IEnumerable<string> tagNames, CancellationToken cancellationToken);

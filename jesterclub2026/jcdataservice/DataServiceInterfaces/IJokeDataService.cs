@@ -15,4 +15,6 @@ public interface IJokeDataService
     public Task<JokeSummaryDto?> UpdateJokeEmotionCounters(JokeEmotionUpdateDto jokeEmotionUpdateDto, CancellationToken cancellationToken);
 
     public Task<IEnumerable<JokeSummaryDto>> GetLatestJokes(CancellationToken cancellationToken);
+
+    public Task<IEnumerable<JokeSummaryDto>> GetLatestJokes(int page, CancellationToken cancellationToken);
 }

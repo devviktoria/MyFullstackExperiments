@@ -1,6 +1,16 @@
 GET https://localhost:7027/api/joke/getlatestjokes
 
 ###
+GET https://localhost:7027/api/joke/getlatestjokes/1
+
+###
+GET https://localhost:7027/api/joke/getlatestjokes/2
+
+###
+GET https://localhost:7027/api/joke/getlatestjokes/16
+
+###
+
 GET https://localhost:7027/api/joke/2/upsert
 
 ###
