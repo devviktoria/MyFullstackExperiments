@@ -23,7 +23,7 @@ export class App {
   protected readonly title = signal('Jester Club 2026');
   private fakeUserAuthService = inject(FakeUserAuthService);
   userSummaryList = this.fakeUserAuthService.getAllUsers();
-  currentUserId = this.fakeUserAuthService.currentUser().id;
+  currentUserId = this.fakeUserAuthService.currentUser().userId;
   constructor() {
   }
 

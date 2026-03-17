@@ -1,5 +1,5 @@
-@if (userIsSignedIn() ){
-<span>Welcome, {{ user().name }}!</span>
+@if (userIsSignedIn()) {
+  <span>Welcome, {{ user().userName }}!</span>
 } @else {
-<span>Welcome!</span>
+  <span>Welcome!</span>
 }

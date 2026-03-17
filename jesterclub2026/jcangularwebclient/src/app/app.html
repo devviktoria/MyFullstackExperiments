@@ -20,8 +20,8 @@
       </button>
       <mat-menu #userSelect="matMenu">
         @for (userSummary of userSummaryList; track userSummary) {
-          <button mat-menu-item (click)="onUserChange(userSummary.id)">
-            {{ userSummary.name }}
+          <button mat-menu-item (click)="onUserChange(userSummary.userId)">
+            {{ userSummary.userName }}
           </button>
         }
       </mat-menu>

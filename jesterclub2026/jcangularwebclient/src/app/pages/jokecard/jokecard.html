@@ -3,7 +3,7 @@
     <p class="joke-text">{{ joke().text }}</p>
   </mat-card-content>
   <mat-card-footer
-    ><p class="joke-author">by {{ joke().author }}</p>
+    ><p class="joke-author">by {{ joke().authorName }}</p>
     @if (joke().source.length > 0) {
       <p class="joke-source">(Source: {{ joke().source }})</p>
     }

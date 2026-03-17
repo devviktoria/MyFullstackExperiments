@@ -29,7 +29,7 @@ export class JokeEditorService {
     return this.http.get<JokeUpsertModel>(this.newJokeUrl, this.httpOptions)
       .pipe(map(j => ({
         ...j,
-        userId: this.fakeUserAuthService.currentUser().id
+        userId: this.fakeUserAuthService.currentUser().userId
       })),
         catchError(this.handleError<JokeUpsertModel>('GetNewJokeUpsertData', undefined))
       );
@@ -61,7 +61,7 @@ export class JokeEditorService {
   updateJokeReaction(jokeReaction: JokeReaction) {
     let counterUpdate: JokeReactionUpdate = {
       jokeId: jokeReaction.jokeId,
-      userId: this.fakeUserAuthService.currentUser().id,
+      userId: this.fakeUserAuthService.currentUser().userId,
       emotion: jokeReaction.emotion
     };
     return this.http.patch<JokeSummary>(
