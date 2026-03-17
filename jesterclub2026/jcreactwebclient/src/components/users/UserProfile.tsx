@@ -18,6 +18,7 @@ import { UserSummary } from "@/interfaces/usersummary.data";
 import { JokeSummary } from "@/interfaces/jokesummary.data";
 import {
   GetUserDraftJokes,
+  GetUserInformation,
   GetUserPublishedJokes,
 } from "@/lib/user/userprofile.service";
 import JokeCard from "../jokes/JokeCard";
@@ -34,34 +35,50 @@ export default function UserProfile({ userId }: UserProfileProps) {
   const isDraftsVisible = isSignedIn && user.userId === userId;
 
   const [tabIndex, setTabIndex] = React.useState(
-    isDraftsVisible && tabParam === "drafts" ? 1 : 0,
+    isDraftsVisible && tabParam === "drafts" ? "1" : "0",
   );
 
+  const [requestedUser, setRequestedUser] = useState<UserSummary | undefined>(
+    undefined,
+  );
+  const [requestedUserLoaded, setRequestedUserLoaded] = useState(false);
   const [publishedJokes, setPublishedJokes] = useState<JokeSummary[]>([]);
   const [publishedLoaded, setPublishedLoaded] = useState(false);
   const [draftJokes, setDraftJokes] = useState<JokeSummary[]>([]);
   const [draftLoaded, setDraftLoaded] = useState(false);
 
-  let requestedUser: UserSummary | undefined = undefined;
-
-  if (isSignedIn && user.userId === userId) {
-    requestedUser = user;
-  } else {
-    // We have to query the user, but this is not implemented yet!
-    // let's have an undefined user for now
-    requestedUser = undefined;
-  }
-
   const handleTabChange = (
     event: React.SyntheticEvent,
-    newTabIndex: number,
+    newTabIndex: string,
   ) => {
     setTabIndex(newTabIndex);
 
-    if (newTabIndex === 0) {
+    if (newTabIndex === "0") {
       setPublishedLoaded(false);
     }
   };
+
+  useEffect(() => {
+    async function loadUser() {
+      try {
+        // 👉 Ha saját profil
+        if (isSignedIn && user.userId === userId) {
+          setRequestedUser(user);
+          setRequestedUserLoaded(true);
+          return;
+        }
+
+        // 👉 Ha más user
+        const requestedUser = await GetUserInformation(userId);
+        setRequestedUser(requestedUser);
+        setRequestedUserLoaded(true);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    loadUser();
+  }, [isSignedIn, user, userId]);
 
   useEffect(() => {
     async function loadPublished() {
@@ -84,16 +101,16 @@ export default function UserProfile({ userId }: UserProfileProps) {
       }
     }
 
-    if (tabIndex === 0 && !publishedLoaded) {
+    if (tabIndex === "0" && !publishedLoaded) {
       loadPublished();
     }
 
-    if (tabIndex === 1 && isDraftsVisible && !draftLoaded) {
+    if (tabIndex === "1" && isDraftsVisible && !draftLoaded) {
       loadDrafts();
     }
   }, [tabIndex, userId, isDraftsVisible]);
 
-  if (!requestedUser) {
+  if (requestedUserLoaded && !requestedUser) {
     return (
       <Typography
         variant="body1"
@@ -115,16 +132,16 @@ export default function UserProfile({ userId }: UserProfileProps) {
           align="center"
           sx={{ mt: 2, fontWeight: 500 }}
         >
-          {user.name}
+          {requestedUser?.userName}
         </Typography>
         <TabContext value={tabIndex}>
           <Box sx={{ borderBottom: 2, borderColor: "divider" }}>
             <TabList onChange={handleTabChange}>
-              <Tab label="Published Jokes" value={0} />
-              {isDraftsVisible ? <Tab label="Drafts" value={1} /> : null}
+              <Tab label="Published Jokes" value="0" />
+              {isDraftsVisible ? <Tab label="Drafts" value="1" /> : null}
             </TabList>
           </Box>
-          <TabPanel value={0}>
+          <TabPanel value="0">
             {publishedJokes.length > 0 ? (
               <section className={styles.jokelist}>
                 {publishedJokes.map((joke) => (
@@ -143,7 +160,7 @@ export default function UserProfile({ userId }: UserProfileProps) {
             )}
           </TabPanel>
           {isDraftsVisible ? (
-            <TabPanel value={1}>
+            <TabPanel value="1">
               {draftJokes.length > 0 ? (
                 <section className={styles.jokelist}>
                   {draftJokes.map((joke) => (

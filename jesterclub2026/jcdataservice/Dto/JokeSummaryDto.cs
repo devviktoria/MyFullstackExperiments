@@ -3,7 +3,8 @@ namespace jcdataservice.Dto;
 public record JokeSummaryDto(
     int JokeId,
     string Text,
-    string Author,
+    int? AuthorId,
+    string AuthorName,
     string Source,
     IEnumerable<string> Tags,
     IEnumerable<EmotionResponseDto> EmotionResponses

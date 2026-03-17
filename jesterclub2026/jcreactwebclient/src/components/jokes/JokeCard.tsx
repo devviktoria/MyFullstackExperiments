@@ -67,9 +67,11 @@ export default function JokeCard({
     >
       <CardContent>
         <Typography variant="body1">{joke.text}</Typography>
-        <Typography variant="body2" align="right" sx={{ fontWeight: "bold" }}>
-          {joke.author}
-        </Typography>
+        <Link href={`/${joke.authorId}`}>
+          <Typography variant="body2" align="right" sx={{ fontWeight: "bold" }}>
+            {joke.authorName}
+          </Typography>
+        </Link>
         {joke.source && (
           <Typography
             variant="body2"

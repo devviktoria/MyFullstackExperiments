@@ -34,6 +34,7 @@ public class UserDataService : IUserDataService
         return publishedJokes.Select(joke => new JokeSummaryDto(
                                     joke.JokeId,
                                     joke.JokeText,
+                                    joke.User?.UserId,
                                     joke.User is null ? "" : joke.User.UserName,
                                     joke.Source ?? "",
                                     joke.Tags is null ? new List<string>() : joke.Tags.Select(tag => tag.Name),
@@ -48,6 +49,7 @@ public class UserDataService : IUserDataService
         return draftJokes.Select(joke => new JokeSummaryDto(
                                     joke.JokeId,
                                     joke.JokeText,
+                                    joke.User?.UserId,
                                     joke.User is null ? "" : joke.User.UserName,
                                     joke.Source ?? "",
                                     joke.Tags is null ? new List<string>() : joke.Tags.Select(tag => tag.Name),

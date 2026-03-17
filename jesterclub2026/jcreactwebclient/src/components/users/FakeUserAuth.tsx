@@ -35,7 +35,7 @@ export default function UserMenu() {
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         {users.map((u) => (
           <MenuItem key={u.userId} onClick={() => selectUser(u.userId)}>
-            {u.name}
+            {u.userName}
           </MenuItem>
         ))}
       </Menu>

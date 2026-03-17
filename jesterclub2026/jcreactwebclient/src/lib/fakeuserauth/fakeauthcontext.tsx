@@ -3,11 +3,11 @@ import { createContext, useContext, useState } from "react";
 import { UserSummary } from "@/interfaces/usersummary.data";
 
 const users: UserSummary[] = [
-  { userId: 0, name: "No one" },
-  { userId: 1, name: "Viki" },
-  { userId: 2, name: "Charles" },
-  { userId: 3, name: "Emily" },
-  { userId: 4, name: "Jack" },
+  { userId: 0, userName: "No one" },
+  { userId: 1, userName: "Viki" },
+  { userId: 2, userName: "Charles" },
+  { userId: 3, userName: "Emily" },
+  { userId: 4, userName: "Jack" },
 ];
 
 type CurrentUserContextType = {

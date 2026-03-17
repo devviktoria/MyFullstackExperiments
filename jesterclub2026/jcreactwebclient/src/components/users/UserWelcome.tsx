@@ -6,7 +6,7 @@ export default function UserWelcome() {
   const { user, isSignedIn } = useCurrentUserContext();
 
   return isSignedIn ? (
-    <Typography variant="h6">Welcome {user.name}!</Typography>
+    <Typography variant="h6">Welcome {user.userName}!</Typography>
   ) : (
     <Typography variant="h6">Welcome!</Typography>
   );
