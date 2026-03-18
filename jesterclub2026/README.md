@@ -76,12 +76,14 @@ This is a **[Next.js 16.1](https://nextjs.org)** project bootstrapped with [`cre
 
 #### Key Features
 
-- Joke listing
+- Joke listing with continuous loading
 - Light and dark mode switch
 - Fake user authentication
 - Joke emotional reaction handling
 - Joke insertion
 - Joke update
+- Profile page
+- Joke statistics
 
 ## Goals of This Project
 
