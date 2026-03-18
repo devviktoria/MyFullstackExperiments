@@ -23,7 +23,7 @@ import {
   GetJokeUpsertData,
   GetNewJokeUpsertData,
   UpdateJoke,
-} from "@/lib/jokeeditor/jokeeditor.service";
+} from "@/lib/joke/jokeeditor.service";
 
 interface JokeFormProps {
   jokeId?: string;

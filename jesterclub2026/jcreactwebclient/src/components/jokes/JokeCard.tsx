@@ -26,6 +26,7 @@ interface JokeCardProps {
   loading?: boolean;
   isJokeEmotionsVisible?: boolean;
   editHref?: string;
+  statisticsHref?: string;
 }
 
 const emojiCharacters = [
@@ -42,6 +43,7 @@ export default function JokeCard({
   loading,
   isJokeEmotionsVisible = true,
   editHref,
+  statisticsHref,
 }: JokeCardProps) {
   const cardColor = React.useMemo(() => {
     const colors = ["yellow", "red", "blue"] as const;
@@ -137,15 +139,20 @@ export default function JokeCard({
           </div>
         )}
       </CardContent>
-      {editHref && (
-        <CardActions>
+      <CardActions>
+        {editHref && (
           <Link href={editHref}>
             <Button variant="contained" disableElevation>
               Edit
             </Button>
           </Link>
-        </CardActions>
-      )}
+        )}
+        {statisticsHref && (
+          <Link href={statisticsHref}>
+            <Button variant="contained">Statistics</Button>
+          </Link>
+        )}
+      </CardActions>
     </Card>
   );
 }

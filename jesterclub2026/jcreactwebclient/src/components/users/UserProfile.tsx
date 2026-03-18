@@ -189,7 +189,11 @@ export default function UserProfile({ userId }: UserProfileProps) {
             ) : publishedJokes.length > 0 ? (
               <section className={styles.jokelist}>
                 {publishedJokes.map((joke) => (
-                  <JokeCard key={joke.jokeId} joke={joke} />
+                  <JokeCard
+                    key={joke.jokeId}
+                    joke={joke}
+                    statisticsHref={`/joke/${joke.jokeId}`}
+                  />
                 ))}
               </section>
             ) : (

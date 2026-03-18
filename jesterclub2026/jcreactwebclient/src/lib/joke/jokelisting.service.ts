@@ -4,6 +4,20 @@ import { JokeSummary } from '../../interfaces/jokesummary.data';
 const jokeBaseUrl = 'http://localhost:5235/api/joke/';
 const latestJokesUrl = jokeBaseUrl + 'getlatestjokes';
 
+export async function GetJokeSummary(jokeId: number): Promise<JokeSummary> {
+  const result = await fetch(`${jokeBaseUrl}${jokeId}`);
+  if (!result.ok) {
+    throw new Error("Failed to fetch jokes");
+  }
+
+  const joke: JokeSummary = await result.json();
+
+  return {
+    ...joke,
+    text: joke.text.replace(/\\n/g, "\n")
+  }
+}
+
 export async function GetLatestJokes(page: number): Promise<JokeSummary[]> {
   const result = await fetch(`${latestJokesUrl}/${page}`);
   if (!result.ok) {

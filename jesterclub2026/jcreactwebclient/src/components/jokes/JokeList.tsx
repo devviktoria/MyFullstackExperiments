@@ -2,13 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
+
+import { JokeReaction } from "@/types/jokereaction.data";
 import { JokeSummary } from "@/interfaces/jokesummary.data";
-import { GetLatestJokes } from "@/lib/jokelisting/jokelisting.service";
+
+import { UpdateJokeReaction } from "@/lib/joke/jokeeditor.service";
+import { GetLatestJokes } from "@/lib/joke/jokelisting.service";
+
+import { useCurrentUserContext } from "@/lib/fakeuserauth/fakeauthcontext";
+
 import styles from "./Joke.module.css";
 import JokeCard from "./JokeCard";
-import { JokeReaction } from "@/types/jokereaction.data";
-import { UpdateJokeReaction } from "@/lib/jokeeditor/jokeeditor.service";
-import { useCurrentUserContext } from "@/lib/fakeuserauth/fakeauthcontext";
 
 export default function JokeList() {
   const [jokes, setJokes] = useState<JokeSummary[]>([]);
