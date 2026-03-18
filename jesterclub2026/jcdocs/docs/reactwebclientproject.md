@@ -6,11 +6,14 @@ This is a **[Next.js 16.1](https://nextjs.org)** project bootstrapped with [`cre
 
 ## Key Features
 
-- Joke listing
+- Joke listing with continuous loading
+- Light and dark mode switch
 - Fake user authentication
 - Joke emotional reaction handling
 - Joke insertion
 - Joke update
+- Profile page
+- Joke statistics
 
 ## Location
 
@@ -35,5 +38,11 @@ All source code is located in the **src** folder, organized as follows:
 **Homepage (light theme, user signed in):**  
 ![Homepage (light theme, user signed in)](../screenshots/reacthomepageuserlight.png)
 
-**Add Joke screen:**  
-![Add Joke screen](../screenshots/reactnewjoke.png)
+**Add Joke page:**  
+![Add Joke page](../screenshots/reactnewjoke.png)
+
+**User profile page:**  
+![Add Joke page](../screenshots/reactprofilepage.png)
+
+**Joke statistics page:**  
+![Add Joke page](../screenshots/reactjokestatistics.png)
