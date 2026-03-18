@@ -1,0 +1,15 @@
+GET http://localhost:5235/api/responsestatistics/14
+
+###
+GET https://localhost:7027/api/responsestatistics/14
+
+###
+GET https://localhost:7027/api/responsestatistics/14?days=7
+
+###
+GET https://localhost:7027/api/responsestatistics/14?days=28
+
+###
+GET https://localhost:7027/api/responsestatistics/14?days=60
+
+###

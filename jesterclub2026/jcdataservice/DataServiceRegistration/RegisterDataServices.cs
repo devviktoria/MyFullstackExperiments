@@ -1,4 +1,5 @@
 using jcdataservice.DataServiceInterfaces;
+using jcdataservice.DataServices;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace jcdataservice.DataServiceRegistration;
@@ -9,6 +10,7 @@ public static class RegisterDataServices
     {
         services.AddScoped<IJokeDataService, JokeDataService>();
         services.AddScoped<IUserDataService, UserDataService>();
+        services.AddScoped<IResponseStatisticsDataService, ResponseStatisticsDataService>();
 
         return services;
     }

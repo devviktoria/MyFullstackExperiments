@@ -15,6 +15,17 @@ namespace jcwebapi.Controllers
             _jokeDataService = jokeDataService;
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<JokeSummaryDto>> GetJokeSummary(int id, CancellationToken cancellationToken)
+        {
+            var dto = await _jokeDataService.GetJokeSummary(id, cancellationToken);
+            if (dto is null)
+            {
+                return NotFound();
+            }
+            return Ok(dto);
+        }
+
         [HttpGet("upsert", Name = nameof(GetNewJokeUpsertData))]
         public ActionResult<JokeUpsertDto> GetNewJokeUpsertData()
         {

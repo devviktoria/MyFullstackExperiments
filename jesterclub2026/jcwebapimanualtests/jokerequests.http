@@ -1,3 +1,6 @@
+GET https://localhost:7027/api/joke/14
+
+###
 GET https://localhost:7027/api/joke/getlatestjokes
 
 ###

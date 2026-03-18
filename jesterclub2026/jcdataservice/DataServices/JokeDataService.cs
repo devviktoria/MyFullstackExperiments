@@ -17,6 +17,25 @@ public class JokeDataService : IJokeDataService
         _pageSize = options.Value.PageSize;
     }
 
+    public async Task<JokeSummaryDto?> GetJokeSummary(int id, CancellationToken cancellationToken)
+    {
+        var joke = await _jokeDataProvider.GetJokeById(id, cancellationToken);
+        if (joke is null)
+        {
+            return null;
+        }
+
+        return new JokeSummaryDto(
+                    joke.JokeId,
+                    joke.JokeText,
+                    joke.User?.UserId,
+                    joke.User is null ? "" : joke.User.UserName,
+                    joke.Source ?? "",
+                    joke.Tags is null ? new List<string>() : joke.Tags.Select(tag => tag.Name),
+                    joke.EmotionCounters!.Select(counter => new EmotionResponseDto(counter.Emotion, counter.Counter))
+                    );
+    }
+
     public JokeUpsertDto GetNewJokeUpsertData()
     {
         return new JokeUpsertDto(0, string.Empty, string.Empty, DateTime.Now, null, 0, new List<string>());

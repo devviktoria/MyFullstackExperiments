@@ -4,6 +4,8 @@ namespace jcdataservice;
 
 public interface IJokeDataService
 {
+    public Task<JokeSummaryDto?> GetJokeSummary(int id, CancellationToken cancellationToken);
+
     public JokeUpsertDto GetNewJokeUpsertData();
 
     public Task<JokeUpsertDto?> GetJokeUpsertData(int id, CancellationToken cancellationToken);
